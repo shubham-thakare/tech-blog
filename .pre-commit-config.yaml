@@ -1,0 +1,29 @@
+default_language_version:
+  python: python3
+
+default_stages:
+  - commit
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.1.0
+    hooks:
+      # Python Checks
+      - id: check-ast
+      - id: debug-statements
+      - id: flake8
+        exclude: '^apps/website/migrations/,^apps/website/static/css/'
+      # Config Hooks
+      - id: check-json
+      - id: check-xml
+      - id: check-yaml
+        exclude: '^helm/'
+      # General Hooks
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      # Git related hooks
+      - id: check-merge-conflict
+      - id: no-commit-to-branch
+        args:
+          - "--branch=develop"
+          - "--branch=master"
