@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+
+{% block title %}Setup.com | Sitemap{% endblock %}
+
+{% block content %}
+<div class="container mt-3 mb-3">
+    <h1 class="display-md-5">
+        Sitemap
+    </h1>
+    <hr />
+    {% for item in 'abcdefgh' %}
+    <div class="row">
+        <div class="col-12">
+            {% if item == 'a' or item == 'd' or item == 'g' %}
+            <h3 class="display-md-5">
+                May 2020
+            </h3>
+            {% endif %}
+            <a href="#">
+                <h5 class="display-md-5 ml-3">
+                    Link 1
+                </h5>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

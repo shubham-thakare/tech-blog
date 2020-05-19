@@ -3,13 +3,31 @@
 {% block title %}Setup.com{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row flex-xl-nowrap">
-        <div class="col-md-2 col-xl-2 bd-sidebar">Test</div>
-        <div class="col-md-8 col-xl-8 py-md-3 pl-md-5 bd-content">
-            Test
+<div class="jumbotron jumbotron-fluid" style="background: var(--custom-light-bg);">
+    <div class="container">
+        <h1 class="display-md-5">
+            <b>We</b> are here...
+        </h1>
+        <h1 class="lead">
+            ...to help you to install software seamlessly in your machine
+        </h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row py-3">
+        {% for i in "abcdef" %}
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <img src="https://via.placeholder.com/300x200.png" class="card-img-top" alt="..." height="160px" width="260px">
+                <a href="#">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="col-md-2 col-xl-2 bd-sidebar">Test</div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
