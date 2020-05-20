@@ -3,10 +3,36 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
+        <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
         <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+        {# Meta for public sharing #}
+        <meta
+          name="keywords"
+          content="{{ public_keywords|default:_('setup,configuration,configure,installation,how to install,installing') }}"
+        />
+        <meta
+          name="description"
+          content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}"
+        />
+
+        {# Facebook Sharing #}
+        <meta property="og:url" content="{{ public_url|default:_('https://www.setup.com/') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ public_title|default:_('Setup.com') }}">
+        <meta property="og:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
+        <meta property="og:image" content="{{ public_image|default:_('/static/images/brand_logo.png') }}">
+
+        {# Twitter Sharing #}
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ public_title|default:_('Setup.com') }}">
+        <meta name="twitter:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
+        <meta name="twitter:image" content="{{ public_image|default:_('/static/images/brand_logo.png') }}">
+        {# END Meta for public sharing #}
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script rel="js" src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -16,8 +42,8 @@
         {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
     </head>
     <body>
-        <!-- Navbar -->
-        <nav class="navbar sticky-top navbar-expand flex-column flex-md-row bg-light">
+        {# Navbar #}
+        <nav class="navbar navbar-expand flex-column flex-md-row bg-light">
             <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Setup.com">
                  <img src="{% static 'images/brand_logo.png' %}" height="50" class="d-inline-block align-top" alt="" loading="lazy">
                 {% block nav_title %}{% endblock %}
@@ -33,13 +59,13 @@
                 </div>
             </div>
         </nav>
-        <!-- END Navbar -->
+        {# END Navbar #}
 
-        <!-- Container -->
+        {# Container #}
         {% block content %}{% endblock %}
-        <!-- END Container -->
+        {# END Container #}
 
-        <!-- Footer -->
+        {# Footer #}
         {% block footer %}
         <div class="footer">
             <div class="jumbotron jumbotron-fluid mb-0 bg-dark text-white">
@@ -50,30 +76,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 small">
+                        <div class="col-6 small mb-2">
+                            <a href="{% url 'promote_products' %}" class="text-white">Promote Product</a>
+                            &nbsp;|&nbsp;
                             <a href="{% url 'privacy_policy' %}" class="text-white">Privacy Policy</a>
                             &nbsp;|&nbsp;
-                            <a href="{% url 'terms_and_conditions' %}" class="text-white">Terms & Conditions</a>
-                            &nbsp;|&nbsp;
-                            <a href="{% url 'sitemap' %}" class="text-white">Sitemap</a>
+                            <a href="{% url 'terms_of_service' %}" class="text-white">Terms of Service</a>
                         </div>
-                        <div class="col-md-6 mt-sm-2 mt-md-0 text-md-right small">
-                            &copy; 2020 <a href="/" class="text-white">Setup.com</a>, all rights reserved.
+                        <div class="col-md-6 mt-md-0 text-md-right small text-muted">
+                            &copy; 2020 <a href="/" class="text-muted">Setup.com</a>, all rights reserved.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         {% endblock %}
-        <!-- END Footer -->
+        {# END Footer #}
 
-        <!-- Cookies Policy -->
-        <div class="alert alert-warning alert-dismissible fade show fixed-bottom rounded-0 mb-0 small text-justify" role="alert">
-            We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <!-- END Cookies Policy -->
+        {# Cookies Policy #}
+        <!-- <div class="alert alert-warning alert-dismissible fade show fixed-bottom rounded-0 mb-0 small text-justify" role="alert">-->
+        <!--    We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.-->
+        <!--    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+        <!--        <span aria-hidden="true">&times;</span>-->
+        <!--    </button>-->
+        <!-- </div> -->
+        {# END Cookies Policy #}
     </body>
 </html>

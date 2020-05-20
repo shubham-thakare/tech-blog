@@ -29,6 +29,15 @@ img {
     color: #343a40;
 }
 
+.text-large {
+    font-size: 8rem;
+    font-weight: bold;
+}
+
+.large-icon {
+    font-size: 20px;
+}
+
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { }
 

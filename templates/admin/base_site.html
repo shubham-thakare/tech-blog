@@ -1,9 +1,12 @@
 {% extends "admin/base.html" %}
+{% load static %}
 
 {% block title %}Setup.com site administration{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">Setup.com</a></h1>
+<h1 id="site-name"><a href="{% url 'admin:index' %}">
+    <img src="{% static 'images/brand_logo_admin.png' %}" height="50" class="d-inline-block align-top" alt="" loading="lazy">
+</a></h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

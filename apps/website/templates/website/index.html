@@ -9,20 +9,26 @@
             <b>We</b> are here...
         </h1>
         <h1 class="lead">
-            ...to help you to install software seamlessly in your machine
+            ...to help you to get everything configured seamlessly.
         </h1>
     </div>
 </div>
 <div class="container">
-    <div class="row py-3">
-        {% for i in "abcdef" %}
-        <div class="col-md-3">
-            <div class="card mb-3">
-                <img src="https://via.placeholder.com/300x200.png" class="card-img-top" alt="..." height="160px" width="260px">
-                <a href="#">
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <img src="{{article.public_image}}" class="card-img-top" alt="..." height="180px" width="260px">
+                <a href="{% url 'article_base' article_id=article.id page_name=article.page_url %}">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">{{article.title|truncatechars:56}}</h5>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                {{article.time_ago}}
+                                <b>&centerdot;</b>
+                                {{article.read_time}}
+                            </small>
+                        </p>
                     </div>
                 </a>
             </div>

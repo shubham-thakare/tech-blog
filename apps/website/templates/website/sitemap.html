@@ -8,19 +8,17 @@
         Sitemap
     </h1>
     <hr />
-    {% for item in 'abcdefgh' %}
+    {% for key in articles %}
     <div class="row">
         <div class="col-12">
-            {% if item == 'a' or item == 'd' or item == 'g' %}
             <h3 class="display-md-5">
-                May 2020
+                {{key}}
             </h3>
-            {% endif %}
-            <a href="#">
-                <h5 class="display-md-5 ml-3">
-                    Link 1
-                </h5>
-            </a>
+            {% for article in articles %}
+                <a href="#" class="ml-3">
+                    {{article.title}}
+                </a>
+            {% endfor %}
         </div>
     </div>
     {% endfor %}
