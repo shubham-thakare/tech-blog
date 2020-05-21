@@ -17,6 +17,32 @@ img {
     -webkit-user-drag: none;
 }
 
+pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+pre code {
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    background-color: inherit;
+    border-radius: none;
+}
+
+code {
+    color: inherit;
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+}
+
 .form-control:focus,
 .btn-dark.focus, .btn-dark:focus {
     box-shadow: none;
@@ -39,10 +65,20 @@ img {
 }
 
 // Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) { }
+@media (max-width: 575.98px) {
+    h1.sm-size {
+        font-size: 200%;
+    }
+
+    h1.sm-size {
+        font-size: 75%;
+    }
+}
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) and (max-width: 767.98px) { }
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) and (max-width: 991.98px) { }

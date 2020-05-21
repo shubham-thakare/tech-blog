@@ -1,4 +1,5 @@
 {% extends "./base.html" %}
+{# {% load markdown_render %} #}
 
 {% block title %}{{public_title}}{% endblock %}
 
@@ -10,20 +11,21 @@
         </div>
         <div class="col-lg-8">
             <h1 class="display-md-5">{{public_title}}</h1>
-            <h1 class="lead text-muted">{{public_description}}</h1>
+            <span class="text-muted">{{public_description}}</span>
             <div class="row">
-                <div class="col-8">
+                <div class="col-7">
                     <small class="text-muted">{{created_at}} <b>&centerdot;</b> {{read_time}}</small>
                 </div>
-                <div class="col-md-4 mt-sm-2 mt-md-0 text-md-right">
-                    <a href="#"><i class="fa fa-twitter mr-1 large-icon"></i></a>
-                    <a href="#"><i class="fa fa-linkedin-square mr-1 large-icon"></i></a>
-                    <a href="#"><i class="fa fa-facebook-official mr-1 large-icon"></i></a>
-                    <a href="#"><i class="fa fa-whatsapp large-icon"></i></a>
+                <div class="col-5 mt-sm-2 mt-md-0 text-right">
+                    <a href="#"><i class="fa fa-twitter mr-1 large-icon align-bottom"></i></a>
+                    <a href="#"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom"></i></a>
+                    <a href="#"><i class="fa fa-facebook-official mr-1 large-icon align-bottom"></i></a>
+                    <a href="#"><i class="fa fa-whatsapp large-icon align-bottom"></i></a>
                 </div>
             </div>
             <hr />
             {# Article Container #}
+            {# {{ md_file | markdown | safe }} #}
             {% block article_content %}{% endblock %}
             {# END Article Container #}
         </div>

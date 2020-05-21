@@ -5,10 +5,10 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid" style="background: var(--custom-light-bg);">
     <div class="container">
-        <h1 class="display-md-5">
+        <h1 class="display-md-5 sm-size">
             <b>We</b> are here...
         </h1>
-        <h1 class="lead">
+        <h1 class="lead sm-size">
             ...to help you to get everything configured seamlessly.
         </h1>
     </div>
@@ -19,7 +19,7 @@
         <div class="col-md-4 mb-3">
             <div class="card h-100">
                 <img src="{{article.public_image}}" class="card-img-top" alt="..." height="180px" width="260px">
-                <a href="{% url 'article_base' article_id=article.id page_name=article.page_url %}">
+                <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
                     <div class="card-body">
                         <h5 class="card-title">{{article.title|truncatechars:56}}</h5>
                         <p class="card-text">
