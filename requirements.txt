@@ -28,3 +28,7 @@ psycopg2-binary==2.8.4
 
 # Pandas
 pandas==1.0.0
+
+# Utils
+readtime==1.1.1
+pillow==7.1.2

@@ -7,7 +7,7 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
         <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Meta for public sharing #}
         <meta
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 small mb-2">
+                        <div class="col-sm-6 small mb-2">
                             <a href="{% url 'contact_us' %}" class="text-white">Contact Us</a>
                             &nbsp;|&nbsp;
                             <a href="{% url 'privacy_policy' %}" class="text-white">Privacy Policy</a>
@@ -96,12 +96,12 @@
         {# END Footer #}
 
         {# Cookies Policy #}
-        <!-- <div class="alert alert-warning alert-dismissible fade show fixed-bottom rounded-0 mb-0 small text-justify" role="alert">-->
-        <!--    We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.-->
-        <!--    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-        <!--        <span aria-hidden="true">&times;</span>-->
-        <!--    </button>-->
-        <!-- </div> -->
+        {# <div class="alert alert-warning alert-dismissible fade show fixed-bottom rounded-0 mb-0 small text-justify" role="alert"> #}
+            {# We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it. #}
+            {# <button type="button" class="close" data-dismiss="alert" aria-label="Close"> #}
+                {# <span aria-hidden="true">&times;</span> #}
+            {# </button> #}
+        {# </div> #}
         {# END Cookies Policy #}
     </body>
 </html>

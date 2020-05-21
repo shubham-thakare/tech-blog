@@ -3,7 +3,7 @@
 {% block title %}Setup.com{% endblock %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid" style="background: var(--custom-light-bg);">
+<div class="jumbotron jumbotron-fluid sm-mb" style="background: var(--custom-light-bg);">
     <div class="container">
         <h1 class="display-md-5 sm-size">
             <b>We</b> are here...
@@ -18,11 +18,11 @@
         {% for article in articles %}
         <div class="col-md-4 mb-3">
             <div class="card h-100">
-                <img src="{{article.public_image}}" class="card-img-top" alt="..." height="180px" width="260px">
+                <img src="{{article.public_image|default:_('https://via.placeholder.com/300x200.png?text=Image+not+found')}}" class="card-img-top" alt="" height="180px" width="260px">
                 <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
                     <div class="card-body">
-                        <h5 class="card-title">{{article.title|truncatechars:56}}</h5>
-                        <p class="card-text">
+                        <h5 class="card-title sm-size">{{article.title|truncatechars:56}}</h5>
+                        <p class="card-text sm-size">
                             <small class="text-muted">
                                 {{article.time_ago}}
                                 <b>&centerdot;</b>

@@ -13,17 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import TemplateView
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('', include('apps.website.urls'), name='website'),
     path('admin/', admin.site.urls, name='admin'),
+    path('admin/', include('ckeditor_uploader.urls'), name='ckeditor'),
     path(
         "robots.txt",
-        TemplateView.as_view(template_name="robots.txt",
-                             content_type="text/plain"),
+        TemplateView.as_view(template_name='robots.txt',
+                             content_type='text/plain'),
     ),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -60,7 +60,9 @@ INSTALLED_APPS = [
     # 3rd party apps
     "corsheaders",
     "behave_django",
-    'django_extensions'
+    'django_extensions',
+    'ckeditor',
+    'ckeditor_uploader'
 ] + LOCAL_INSTALLED_APPS
 
 MIDDLEWARE = [
@@ -128,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = BASE_DIR + STATIC_URL
 
 # #############################################################################
 # ######################## Authentication Settings ############################
@@ -189,5 +191,23 @@ LOGGING = {
             'level': LOG_LEVEL,
             'propagate': True,
         },
+    },
+}
+
+# CKEditor Settings
+CKEDITOR_FILENAME_GENERATOR = 'apps.website.helpers.utils.get_filename'
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+# Media files (upload path)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'media/uploads/'))
+CKEDITOR_UPLOAD_PATH = 'images/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 'auto',
     },
 }

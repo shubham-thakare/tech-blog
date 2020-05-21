@@ -12,7 +12,7 @@ repos:
       - id: check-ast
       - id: debug-statements
       - id: flake8
-        exclude: '^apps/website/migrations/,^apps/website/static/css/'
+        exclude: '^apps/website/migrations/,^apps/website/static/css/,^static/'
       # Config Hooks
       - id: check-json
       - id: check-xml

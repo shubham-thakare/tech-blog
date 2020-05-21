@@ -64,20 +64,35 @@ code {
     font-size: 20px;
 }
 
-// Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) {
+.card-img-top {
+    background-color: #cccccc;
+    object-fit: cover;
+}
+
+@media screen and (max-width:575.98px) {
     h1.sm-size {
-        font-size: 200%;
+        font-size: 1.5rem;
     }
 
-    h1.sm-size {
-        font-size: 75%;
+    h1.lead.sm-size {
+        font-size: 0.76rem;
+    }
+
+    .card-title.sm-size {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .jumbotron.jumbotron-fluid.sm-mb {
+        margin-bottom: 16px;
     }
 }
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) and (max-width: 767.98px) {
-
+    h1 {
+        font-size: 200%;
+    }
 }
 
 // Medium devices (tablets, 768px and up)

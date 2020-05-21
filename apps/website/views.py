@@ -45,5 +45,6 @@ def article_base(request, article_id, page_name):
         article_data.views += 1
         article_data.save()
         return render(request, f'website/articles/{page_name}.html', context)
-    except Exception:
+    except Exception as ex:
+        print(ex)
         raise Http404()
