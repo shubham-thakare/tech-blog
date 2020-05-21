@@ -117,3 +117,4 @@ testoutput.xml
 .vscode/
 
 mock/
+apps/website/templates/website/articles/
