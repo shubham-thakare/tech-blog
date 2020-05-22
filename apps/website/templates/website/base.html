@@ -24,13 +24,13 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="{{ public_title|default:_('Setup.com') }}">
         <meta property="og:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
-        <meta property="og:image" content="{{ public_image|default:_('/static/images/brand_logo.png') }}">
+        <meta property="og:image" content="{{ public_image|default:_('https://www.setup.com/static/images/brand_logo.png') }}">
 
         {# Twitter Sharing #}
         <meta name="twitter:card" content="summary">
         <meta name="twitter:title" content="{{ public_title|default:_('Setup.com') }}">
         <meta name="twitter:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
-        <meta name="twitter:image" content="{{ public_image|default:_('/static/images/brand_logo.png') }}">
+        <meta name="twitter:image" content="{{ public_image|default:_('https://www.setup.com/static/images/brand_logo.png') }}">
         {# END Meta for public sharing #}
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -46,18 +46,16 @@
         {# Navbar #}
         <nav class="navbar navbar-expand flex-md-row bg-light">
             <a class="navbar-brand mr-0 mr-2" href="/" aria-label="Setup.com">
-                 <img src="{% static 'images/brand_logo.png' %}" height="50" class="d-none d-md-inline-block align-top" alt="" loading="lazy">
-                 <img src="{% static 'images/brand_logo_initial.png' %}" height="33" class="d-md-none d-sm-inline-block align-top" alt="" loading="lazy">
-                {% block nav_title %}{% endblock %}
+                <img src="{% static 'images/brand_logo.png' %}" height="50" class="d-none d-md-inline-block align-top" alt="">
+                <img src="{% static 'images/brand_logo_initial.png' %}" height="33" class="d-md-none d-sm-inline-block align-top" alt="">
+                {# <span class="brand-name-custom initial">S</span><span class="brand-name-custom d-none d-md-inline-block">etup.com</span> #}
             </a>
-            <div class="ml-auto">
+            <div class="ml-auto col-lg-3 col-md-4 col-sm-8 pr-0 pl-5">
                 <div class="input-group input-group-sm">
-                    <input type="search" class="form-control" placeholder="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-dark pr-2 pl-2" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+                    <span class="input-group-addon pr-2 pl-2 rounded-left border border-right-0 search-icon-wrapper">
+                        <i class="fa fa-search text-secondary search-icon"></i>
+                    </span>
+                    <input type="search" class="form-control text-overflow-ellipsis custom-search border-left-0 pl-0 pr-1" placeholder="Search">
                 </div>
             </div>
         </nav>
@@ -74,7 +72,7 @@
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-12">
-                            <a href="/" class="text-white lead"><h2 class="display-5">Setup.com</h2></a>
+                            <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">Setup.com</h2></a>
                         </div>
                     </div>
                     <div class="row">

@@ -7,7 +7,7 @@
 <article class="container-fluid mt-3 mb-3">
     <div class="row">
         <div class="col-lg-2 d-none d-lg-block text-left">
-<!--            <img src="https://via.placeholder.com/160x600.png" />-->
+            {# <img src="https://via.placeholder.com/160x600.png" /> #}
         </div>
         <div class="col-lg-8">
             <h1 class="display-md-5">{{public_title}}</h1>
@@ -17,10 +17,10 @@
                     <small class="text-muted">{{created_at}} <b>&centerdot;</b> {{read_time}}</small>
                 </div>
                 <div class="col-5 mt-sm-2 mt-md-0 text-right">
-                    <a href="#"><i class="fa fa-twitter mr-1 large-icon align-bottom"></i></a>
-                    <a href="#"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom"></i></a>
-                    <a href="#"><i class="fa fa-facebook-official mr-1 large-icon align-bottom"></i></a>
-                    <a href="#"><i class="fa fa-whatsapp large-icon align-bottom"></i></a>
+                    <a href="https://twitter.com/share?url={{share_url}}" target="_blank"><i class="fa fa-twitter mr-1 large-icon align-bottom"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{share_url}}" target="_blank"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom"></i></a>
+                    <a href="http://www.facebook.com/sharer/sharer.php?u={{share_url}}" target="_blank"><i class="fa fa-facebook-official mr-1 large-icon align-bottom"></i></a>
+                    <a href="https://api.whatsapp.com/send?text={{share_url}}" target="_blank"><i class="fa fa-whatsapp large-icon align-bottom"></i></a>
                 </div>
             </div>
             <hr />
@@ -30,8 +30,40 @@
             {# END Article Container #}
         </div>
         <div class="col-lg-2 d-none d-lg-block text-right">
-<!--            <img src="https://via.placeholder.com/160x600.png" />-->
+            {# <img src="https://via.placeholder.com/160x600.png" /> #}
         </div>
     </div>
 </article>
+{% if related_articles_length >= 1 %}
+<div class="jumbotron jumbotron-fluid mb-0 pb-1 pt-3" style="background: var(--custom-light-bg);">
+    <div class="container">
+        <h2>
+            Related
+        </h2>
+        <div class="row">
+            {% for article in related_articles %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}" class="d-flex">
+                        <img src="{{article.public_image}}" class="card-img-top" alt="" height="180px" width="260px" loading="lazy">
+                    </a>
+                    <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
+                        <div class="card-body">
+                            <span class="card-title sm-size">{{article.title|truncatechars:56}}</span>
+                            <p class="card-text sm-size">
+                                <small class="text-muted">
+                                    {{article.time_ago}}
+                                    <b>&centerdot;</b>
+                                    {{article.read_time}}
+                                </small>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

@@ -4,61 +4,42 @@
 
 {% block content %}
 <div class="container mt-3 mb-3">
-    <h1 class="display-md-5">
+    <h1 class="display-md-5 sm-size">
         Contact Us
     </h1>
     <hr />
-    <form name="contact_us">
+    <form name="contact_us" method="post">
         {% csrf_token %}
         <div class="form-row">
             <div class="col-lg-4 mb-3">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control {{name.invalid}}" id="name" name="name" value="{{name.value}}" autocomplete="off" maxlength="50" />
+                <div class="invalid-feedback">
+                    Please provide your name.
+                </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-lg-4 mb-3">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" required>
+                <input type="text" class="form-control {{email.invalid}}" id="email" name="email" value="{{email.value}}" autocomplete="off" maxlength="50" />
+                <div class="invalid-feedback">
+                    Please provide a valid email.
+                </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col-lg-4 mb-3">
                 <label for="message">Message</label>
-                <textarea class="form-control" id="message" name="message" required maxlength="1000" aria-multiline="true" rows="5"></textarea>
+                <textarea class="form-control {{message.invalid}}" id="message" name="message" maxlength="1000" aria-multiline="true" rows="5">{{message.value}}</textarea>
+                <div class="invalid-feedback">
+                    Please provide your message.
+                    <br/>
+                    <i>The message must be at least 20 characters long.</i>
+                </div>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-dark" type="submit">Submit</button>
     </form>
 </div>
-<script>
-    $(function() {
-      $("form[name='contact_us']").validate({
-        rules: {
-          name: "required",
-          email: {
-            required: true,
-            email: true
-          },
-          message: {
-            required: true,
-            minlength: 15,
-            maxlength: 1000
-          }
-        },
-        // Specify validation error messages
-        messages: {
-          name: "Please enter your name",
-          message: {
-            required: "Please provide a message",
-            minlength: "Your password must be at least 15 characters long"
-          },
-          email: "Please enter a valid email address"
-        },
-        submitHandler: function(form) {
-          form.submit();
-        }
-      });
-    });
-</script>
 {% endblock %}

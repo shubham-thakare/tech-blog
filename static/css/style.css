@@ -12,6 +12,10 @@ a:hover {
     color: var(--gray);
 }
 
+article a, article a:hover {
+    text-decoration: underline;
+}
+
 img {
     user-select: none;
     -webkit-user-drag: none;
@@ -44,7 +48,8 @@ code {
 }
 
 .form-control:focus,
-.btn-dark.focus, .btn-dark:focus {
+.btn-dark.focus, .btn-dark:focus,
+.form-control.is-invalid:focus {
     box-shadow: none;
 }
 
@@ -66,6 +71,7 @@ code {
 
 .card-img-top {
     background-color: #cccccc;
+    object-fit: cover;
 }
 
 @media screen and (max-width:575.98px) {

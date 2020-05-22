@@ -120,3 +120,8 @@ def read_article_html_text(file_path: str):
         return html_text
     except Exception:
         return ''
+
+
+def get_host_uri_with_http(request):
+    absolute_uri = str(request.build_absolute_uri()).split('/')
+    return f'{absolute_uri[0]}//{absolute_uri[2]}'

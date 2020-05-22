@@ -1,5 +1,6 @@
 from django.contrib import admin
 from apps.website.models.article import Article
+from apps.website.models.inbox import Inbox
 from django.utils import timezone
 from django import forms
 from ckeditor_uploader.fields import RichTextUploadingFormField
@@ -7,6 +8,9 @@ from apps.website.helpers.utils import get_article_read_time_from_file, \
     get_article_read_time_from_html, \
     get_article_dir_path, get_article_file_name, \
     remove_file, read_article_html_text
+
+
+admin.site.index_title = 'Setup.com administration'
 
 
 class ArticleAdminForm(forms.ModelForm):
@@ -20,24 +24,24 @@ class ArticleAdminForm(forms.ModelForm):
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleAdminForm
     list_display = ['title', 'status', 'last_updated']
-    ordering = ['status']
     search_fields = ('id', 'title', 'status')
+    list_filter = ('status', 'created_at', 'last_updated',)
+    date_hierarchy = 'last_updated'
+    ordering = ('-last_updated',)
 
     # Check for existing html file
     def change_view(self, request, object_id, form_url='', extra_context=None):
         article = Article.objects.filter(id=object_id)[0]
         article_file_path = f'{get_article_dir_path()}' \
                             f'/{article.page_name}.html'
-        article_html = read_article_html_text(article_file_path)
-        print(article_html)
-        return super().change_view(request, object_id, form_url,
-                                   extra_context=extra_context)
+        read_article_html_text(article_file_path)
+        return super().change_view(request, object_id, form_url, extra_context)
 
     # Save new or update existing model
     def save_model(self, request, obj, form, change):
         # Article Page Content
-        html_content = '{% extends "../article_base.html" %}' \
-                       '{% block article_content %}' + \
+        html_content = '{% extends "../article_base.html" %}\n' \
+                       '{% block article_content %}\n' + \
                         str(form["content"].value()) + \
                        '{% endblock %}'
 
@@ -62,15 +66,9 @@ class ArticleAdmin(admin.ModelAdmin):
 
         super().save_model(request, obj, form, change)
 
-    # Soft delete model
-    def delete_model(self, request, obj):
-        obj.status = 'w'
-        obj.last_updated = timezone.now()
-        obj.save()
-
-    # Soft delete model
-    def delete_queryset(self, request, queryset):
-        queryset.update(status='w', last_updated=timezone.now())
+    # Don't delete articles
+    def has_delete_permission(self, request, obj=None):
+        return False
 
     # Update article status to Draft
     def make_draft(modeladmin, request, queryset):
@@ -103,6 +101,32 @@ class ArticleAdmin(admin.ModelAdmin):
     actions = [make_draft, make_published, make_withdrawn, update_readtime]
 
 
-# Register custom model with AdminModel
+class InboxAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'message', 'submitted_on', 'status']
+    ordering = ('-status',)
+    search_fields = ('name', 'email')
+    list_filter = ('submitted_on',)
+    date_hierarchy = 'submitted_on'
+
+    # Update message status to seen
+    def mark_as_seen(modeladmin, request, queryset):
+        queryset.update(status='SN')
+    mark_as_seen.short_description = "Mark selected messages as seen"
+
+    # Update message status to seen
+    def mark_as_unseen(modeladmin, request, queryset):
+        queryset.update(status='UN')
+    mark_as_unseen.short_description = "Mark selected messages as unseen"
+
+    # Deon't delete messages
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    actions = [mark_as_seen, mark_as_unseen]
+
+
 admin.site.register(Article, ArticleAdmin)
-admin.site.index_title = 'Setup.com administration'
+admin.site.register(Inbox, InboxAdmin)
+
+# Globally disable delete selected
+admin.site.disable_action('delete_selected')
