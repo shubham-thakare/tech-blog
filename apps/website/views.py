@@ -12,7 +12,8 @@ def index(request):
         article.time_ago = article.created_at.date()
 
     context = {
-        'articles': articles
+        'articles': articles,
+        'articles_length': len(articles)
     }
     return render(request, 'website/index.html', context)
 
@@ -77,6 +78,7 @@ def article_base(request, article_id, page_name):
         context = {
             'md_file': page_name,
             'public_keywords': article_data.keywords,
+            'tags': str(article_data.keywords).split(','),
             'public_title': article_data.title,
             'public_description': article_data.description,
             'public_image': f'{get_host_uri_with_http(request)}'

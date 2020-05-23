@@ -5,19 +5,11 @@
 }
 
 body {
-    font-family: "Raleway",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial,
-    "Noto Sans",
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji";
+    font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    word-break: break-word;
+    overflow: auto !important;
 }
 
 a {
@@ -37,6 +29,12 @@ article a, article a:hover {
 img {
     user-select: none;
     -webkit-user-drag: none;
+    max-width: 100%;
+}
+
+img.brand-name-initial-logo {
+    min-width: 30px;
+    min-height: 33px;
 }
 
 pre {
@@ -78,27 +76,13 @@ code {
     color: #343a40;
 }
 
-span.brand-name-custom.initial {
-    background: #000;
-    color: #fff;
-    font-weight: 700;
-    padding: 5px 3px 0px 18px;
-    border-radius: 5px;
-    margin-right: 2px;
-}
-
-span.brand-name-custom {
-    font-size: 2rem;
-    font-weight: 500;
-}
-
 .text-large {
     font-size: 8rem;
     font-weight: bold;
 }
 
 .large-icon {
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .card-img-top {
@@ -120,44 +104,65 @@ span.brand-name-custom {
 }
 
 i.search-icon {
-    margin-top: 5px;
+    font-size: 1.2rem;
+    margin-top: 8px;
 }
 
+.custom-badge {
+    background: var(--custom-light-bg);
+    font-weight: 400;
+}
 
+.decoration-none {
+    text-decoration: none !important;
+}
+
+.small, small {
+    font-size: 90%;
+}
 
 @media screen and (max-width:575.98px) {
     .h1, h1 {
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
     }
 
     .h2, h2 {
-        font-size: 1.4rem;
+        font-size: 1.4rem !important;
     }
 
     .h3, h3 {
-        font-size: 1.3rem;
+        font-size: 1.3rem !important;
     }
 
     .h4, h4 {
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
     }
 
     .h5, h5 {
-        font-size: 1.1rem;
+        font-size: 1.1rem !important;
     }
 
     .h6, h6 {
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
 
     h1.lead {
-        font-size: 0.74rem;
+        font-size: 0.80rem !important;
+        font-weight: bold;
+    }
+
+    .small, small {
+        font-size: 80%;
     }
 
     label {
-        font-size: 0.9rem;
+        font-size: 0.9rem !important;
     }
 
+    i.search-icon {
+        font-size: inherit;
+        margin-top: 5px;
+    }
     .form-control {
         height: calc(1.5em + .5rem + 2px);
         padding: .25rem .5rem;
@@ -172,6 +177,14 @@ i.search-icon {
 
     .jumbotron.jumbotron-fluid.sm-mb {
         margin-bottom: 16px;
+    }
+
+    .article-base-read-time {
+        font-size: 80%;
+    }
+
+    .large-icon {
+        font-size: 20px;
     }
 }
 

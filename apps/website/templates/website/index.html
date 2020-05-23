@@ -3,7 +3,7 @@
 {% block title %}Setup.com{% endblock %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid sm-mb" style="background: var(--custom-light-bg);">
+<div class="jumbotron jumbotron-fluid mb-0" style="background: var(--custom-light-bg);">
     <div class="container">
         <h1 class="display-md-5 sm-size">
             <b>We</b> are here...
@@ -13,13 +13,21 @@
         </h1>
     </div>
 </div>
-<div class="container">
+{% if articles_length >= 1 %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <h3 class="display-md-5 sm-size">
+                Go ahead and find a solution to your issue
+            </h3>
+        </div>
+    </div>
     <div class="row">
         {% for article in articles %}
         <div class="col-md-4 mb-3">
             <div class="card h-100">
                 <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}" class="d-flex">
-                    <img src="{{article.public_image}}" class="card-img-top" alt="" height="180px" width="260px" loading="lazy">
+                    <img src="{{article.public_image}}" class="card-img-top" alt="Preview Image" height="180px" width="260px" loading="lazy">
                 </a>
                 <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
                     <div class="card-body">
@@ -38,4 +46,16 @@
         {% endfor %}
     </div>
 </div>
+{% else %}
+<div class="jumbotron jumbotron-fluid mb-0 bg-light" style="background: var(--custom-light-bg);">
+    <div class="container mt-md-4 mb-md-4 pt-5 pb-5">
+        <h1 class="display-5">
+            <b>No articles found!</b>
+        </h1>
+        <h1 class="display-5 text-muted">
+            We're writing some useful articles for you.
+        </h1>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

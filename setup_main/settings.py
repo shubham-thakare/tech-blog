@@ -75,6 +75,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 3rd party middleware
     "corsheaders.middleware.CorsMiddleware",
+    "apps.website.middleware.AttachResponseHeaders"
 ]
 
 TEMPLATES = [
@@ -196,8 +197,14 @@ LOGGING = {
 
 # CKEditor Settings
 CKEDITOR_FILENAME_GENERATOR = 'apps.website.helpers.utils.get_filename'
-CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
-CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = env.bool('CKEDITOR_UPLOAD_SLUGIFY_FILENAME')
+CKEDITOR_IMAGE_BACKEND = env.str('CKEDITOR_IMAGE_BACKEND')
+CKEDITOR_BROWSE_SHOW_DIRS = env.bool('CKEDITOR_BROWSE_SHOW_DIRS')
+CKEDITOR_FORCE_JPEG_COMPRESSION = env.bool('CKEDITOR_FORCE_JPEG_COMPRESSION')
+CKEDITOR_IMAGE_QUALITY = env.int('CKEDITOR_IMAGE_QUALITY')
+CKEDITOR_THUMBNAIL_SIZE = [env.int('CKEDITOR_THUMBNAIL_WIDTH'),
+                           env.int('CKEDITOR_THUMBNAIL_HEIGHT')]
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 # Media files (upload path)
 MEDIA_URL = '/media/'
