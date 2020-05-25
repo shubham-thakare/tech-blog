@@ -10,7 +10,7 @@ from apps.website.helpers.utils import get_article_read_time_from_file, \
     remove_file, read_article_html_text
 
 
-admin.site.index_title = 'Setup.com administration'
+admin.site.index_title = 'SetupFAQ administration'
 
 
 class ArticleAdminForm(forms.ModelForm):

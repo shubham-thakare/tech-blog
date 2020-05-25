@@ -21,17 +21,17 @@
         />
 
         {# Facebook Sharing #}
-        <meta property="og:url" content="{{ public_url|default:_('https://www.setup.com/') }}">
+        <meta property="og:url" content="{{ public_url|default:_('https://www.setupfaq.com/') }}">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="{{ public_title|default:_('Setup.com') }}">
+        <meta property="og:title" content="{{ public_title|default:_('SetupFAQ') }}">
         <meta property="og:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
-        <meta property="og:image" content="{{ public_image|default:_('https://www.setup.com/static/images/brand_logo.png') }}">
+        <meta property="og:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/brand_logo.png') }}">
 
         {# Twitter Sharing #}
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="{{ public_title|default:_('Setup.com') }}">
+        <meta name="twitter:title" content="{{ public_title|default:_('SetupFAQ') }}">
         <meta name="twitter:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
-        <meta name="twitter:image" content="{{ public_image|default:_('https://www.setup.com/static/images/brand_logo.png') }}">
+        <meta name="twitter:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/brand_logo.png') }}">
         {# END Meta for public sharing #}
 
         <style>
@@ -58,10 +58,20 @@
             }
         </style>
         <script>
-            document.write('<div id="first-paint"><span class="brand-name-custom">Setup.com</span></div>');
+            document.write('<div id="first-paint"><span class="brand-name-custom">SetupFAQ</span></div>');
             document.addEventListener('DOMContentLoaded', (event) => {
                 document.getElementById("first-paint").style.display = "none";
             })
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167547653-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-167547653-1');
         </script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -76,7 +86,7 @@
     <body>
         {# Navbar #}
         <nav class="navbar navbar-expand flex-md-row bg-light">
-            <a class="navbar-brand mr-0 mr-2" href="/" aria-label="Setup.com">
+            <a class="navbar-brand mr-0 mr-2" href="/" aria-label="SetupFAQ">
                 <img src="{% static 'images/brand_logo.png' %}" width="194" height="50" class="d-none d-md-inline-block align-top" alt="">
                 <img src="{% static 'images/brand_logo_initial.png' %}" width="30" height="33" class="d-md-none d-sm-inline-block align-top brand-name-initial-logo" alt="">
                 {# <span class="brand-name-custom initial">S</span><span class="brand-name-custom d-none d-md-inline-block">etup.com</span> #}
@@ -103,7 +113,7 @@
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-12">
-                            <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">Setup.com</h2></a>
+                            <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">SetupFAQ</h2></a>
                         </div>
                     </div>
                     <div class="row">
@@ -115,7 +125,7 @@
                             <a href="{% url 'terms_of_service' %}" class="text-white">Terms of Service</a>
                         </div>
                         <div class="col-md-6 mt-md-0 text-md-right small text-light">
-                            &copy; 2020 <a href="/" class="text-light">Setup.com</a>, all rights reserved.
+                            &copy; 2020 <a href="/" class="text-light">SetupFAQ</a>. All rights reserved.
                         </div>
                     </div>
                 </div>
