@@ -43,7 +43,7 @@ ALLOWED_HOSTS = ["*"]
 if ENVIRONMENT == "dev":
     ALLOWED_HOSTS += ["localhost", "127.0.0.1", "*", '0.0.0.0']
 
-ALLOWED_HOSTS = ["*", "EC2_DNS_NAME"]
+ALLOWED_HOSTS = ["*", "ec2-18-188-191-243.us-east-2.compute.amazonaws.com"]
 
 
 # Application definition
