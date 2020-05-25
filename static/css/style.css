@@ -1,0 +1,110 @@
+:root {
+    --custom-light-bg: rgba(38, 90, 38, 0.1);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--gray);
+}
+
+article a, article a:hover {
+    text-decoration: underline;
+}
+
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+pre code {
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    background-color: inherit;
+    border-radius: none;
+}
+
+code {
+    color: inherit;
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+}
+
+.form-control:focus,
+.btn-dark.focus, .btn-dark:focus,
+.form-control.is-invalid:focus {
+    box-shadow: none;
+}
+
+.navbar-brand, .nav-item a {
+    color: #343a40;
+}
+.navbar-brand:hover, .nav-item a:hover {
+    color: #343a40;
+}
+
+.text-large {
+    font-size: 8rem;
+    font-weight: bold;
+}
+
+.large-icon {
+    font-size: 20px;
+}
+
+.card-img-top {
+    background-color: #cccccc;
+    object-fit: cover;
+}
+
+@media screen and (max-width:575.98px) {
+    h1.sm-size {
+        font-size: 1.5rem;
+    }
+
+    h1.lead.sm-size {
+        font-size: 0.76rem;
+    }
+
+    .card-title.sm-size {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .jumbotron.jumbotron-fluid.sm-mb {
+        margin-bottom: 16px;
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+    h1 {
+        font-size: 200%;
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { }

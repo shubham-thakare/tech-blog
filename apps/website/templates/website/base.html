@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+
+        {# Meta for public sharing #}
+        <meta
+          name="keywords"
+          content="{{ public_keywords|default:_('setup,configuration,configure,installation,how to install,installing') }}"
+        />
+        <meta
+          name="description"
+          content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}"
+        />
+
+        {# Facebook Sharing #}
+        <meta property="og:url" content="{{ public_url|default:_('https://www.setupfaq.com/') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ public_title|default:_('SetupFAQ') }}">
+        <meta property="og:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
+        <meta property="og:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/brand_logo.png') }}">
+
+        {# Twitter Sharing #}
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ public_title|default:_('SetupFAQ') }}">
+        <meta name="twitter:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
+        <meta name="twitter:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/brand_logo.png') }}">
+        {# END Meta for public sharing #}
+
+        <style>
+            body {
+                overflow: hidden;
+            }
+            #first-paint {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #fff;
+                z-index: 999;
+            }
+            span.brand-name-custom {
+                color: #343a40;
+                font-weight: 500;
+                font-size: 2rem;
+                font-family: sans-serif !important;
+            }
+        </style>
+        <script>
+            document.write('<div id="first-paint"><span class="brand-name-custom">SetupFAQ</span></div>');
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.getElementById("first-paint").style.display = "none";
+            })
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167547653-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-167547653-1');
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script rel="js" src="{% static 'js/bootstrap.min.js' %}"></script>
+        {% block js_imports %}{% endblock %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" >
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        {% block blockbots %}{% endblock %}
+    </head>
+    <body>
+        {# Navbar #}
+        <nav class="navbar navbar-expand flex-md-row bg-light">
+            <a class="navbar-brand mr-0 mr-2" href="/" aria-label="SetupFAQ">
+                <img src="{% static 'images/brand_logo.png' %}" width="194" height="50" class="d-none d-md-inline-block align-top" alt="">
+                <img src="{% static 'images/brand_logo_initial.png' %}" width="30" height="33" class="d-md-none d-sm-inline-block align-top brand-name-initial-logo" alt="">
+                {# <span class="brand-name-custom initial">S</span><span class="brand-name-custom d-none d-md-inline-block">etup.com</span> #}
+            </a>
+            <div class="ml-auto col-lg-3 col-md-4 col-sm-8 pr-0 pl-5">
+                <div class="input-group">
+                    <span class="input-group-addon pr-2 pl-2 rounded-left border border-right-0 search-icon-wrapper">
+                        <i class="fa fa-search text-secondary search-icon"></i>
+                    </span>
+                    <input type="search" class="form-control text-overflow-ellipsis custom-search border-left-0 pl-0 pr-1" placeholder="Search">
+                </div>
+            </div>
+        </nav>
+        {# END Navbar #}
+
+        {# Container #}
+        {% block content %}{% endblock %}
+        {# END Container #}
+
+        {# Footer #}
+        {% block footer %}
+        <div class="footer">
+            <div class="jumbotron jumbotron-fluid mb-0 bg-dark text-white">
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">SetupFAQ</h2></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 small mb-2">
+                            <a href="{% url 'contact_us' %}" class="text-white">Contact Us</a>
+                            &nbsp;|&nbsp;
+                            <a href="{% url 'privacy_policy' %}" class="text-white">Privacy Policy</a>
+                            &nbsp;|&nbsp;
+                            <a href="{% url 'terms_of_service' %}" class="text-white">Terms of Service</a>
+                        </div>
+                        <div class="col-md-6 mt-md-0 text-md-right small text-light">
+                            &copy; 2020 <a href="/" class="text-light">SetupFAQ</a>. All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        {# END Footer #}
+
+        {# Cookies Policy #}
+        {# <div class="alert alert-warning alert-dismissible fade show fixed-bottom rounded-0 mb-0 small text-justify" role="alert"> #}
+            {# We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it. #}
+            {# <button type="button" class="close" data-dismiss="alert" aria-label="Close"> #}
+                {# <span aria-hidden="true">&times;</span> #}
+            {# </button> #}
+        {# </div> #}
+        {# END Cookies Policy #}
+    </body>
+</html>

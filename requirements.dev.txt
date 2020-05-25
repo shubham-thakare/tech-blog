@@ -1,0 +1,4 @@
+unittest-xml-reporting
+coverage
+ipython
+django-extensions
