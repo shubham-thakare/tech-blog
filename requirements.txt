@@ -33,3 +33,4 @@ pandas==1.0.0
 readtime==1.1.1
 pillow==7.1.2
 django-with-extra-context-admin==0.1.0
+django-ckeditor==5.9.0
