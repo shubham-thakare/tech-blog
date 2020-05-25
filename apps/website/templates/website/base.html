@@ -34,36 +34,6 @@
         <meta name="twitter:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/brand_logo.png') }}">
         {# END Meta for public sharing #}
 
-        <style>
-            body {
-                overflow: hidden;
-            }
-            #first-paint {
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                top: 0;
-                left: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #fff;
-                z-index: 999;
-            }
-            span.brand-name-custom {
-                color: #343a40;
-                font-weight: 500;
-                font-size: 2rem;
-                font-family: sans-serif !important;
-            }
-        </style>
-        <script>
-            document.write('<div id="first-paint"><span class="brand-name-custom">SetupFAQ</span></div>');
-            document.addEventListener('DOMContentLoaded', (event) => {
-                document.getElementById("first-paint").style.display = "none";
-            })
-        </script>
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script rel="js" src="{% static 'js/bootstrap.min.js' %}"></script>

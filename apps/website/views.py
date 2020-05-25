@@ -87,7 +87,7 @@ def article_base(request, article_id, page_name):
             'read_time': article_data.read_time,
             'share_url': request.build_absolute_uri(),
             'related_articles': related_articles,
-            'related_articles_length': len(related_articles)
+            'related_articles_length': 0  # len(related_articles)
         }
 
         article_data.views += 1
