@@ -29,8 +29,8 @@ env.read_env(recurse=True)
 # Determine the Environment
 ENVIRONMENT = env.str("ENVIRONMENT")
 ADMIN_ENABLED = env.bool("ADMIN_ENABLED")
-IS_LOCAL = env.bool("IS_LOCAL")
-DEBUG = env.bool("DEBUG", False)
+IS_LOCAL = True
+DEBUG = False
 SECURE_BROWSER_XSS_FILTER = True
 
 
