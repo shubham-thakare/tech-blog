@@ -8,21 +8,7 @@ from django.contrib.postgres.search import SearchRank, \
 import re
 
 
-def index(request):
-    articles = Article.objects.filter(status='p').order_by('-created_at')
-
-    for article in articles:
-        article.time_ago = article.created_at.date()
-
-    context = {
-        'articles': articles,
-        'articles_length': len(articles)
-    }
-    return render(request, 'website/index.html', context)
-
-
-def search(request):
-    query = request.GET['query']
+def search_articles(query):
     processed_query = re.sub(r'[^\w]', ' ', query)
 
     if processed_query:
@@ -43,8 +29,29 @@ def search(request):
 
         for article in articles:
             article.time_ago = article.created_at.date()
+
+        return articles
     else:
-        articles = {}
+        return {}
+
+
+def index(request):
+    articles = Article.objects.filter(status='p').order_by('-created_at')
+
+    for article in articles:
+        article.time_ago = article.created_at.date()
+
+    context = {
+        'articles': articles,
+        'articles_length': len(articles)
+    }
+
+    return render(request, 'website/index.html', context)
+
+
+def search(request):
+    query = request.GET['query']
+    articles = search_articles(query)
 
     context = {
         'query': query,
@@ -107,7 +114,9 @@ def article_base(request, article_id, page_name):
         article_data = get_object_or_404(Article, id=article_id,
                                          status='p', page_name=page_name)
 
-        related_articles = Article.objects.all()[:3]
+        related_articles = search_articles(article_data.title)
+        related_articles = related_articles.exclude(id=article_id)[:3]
+
         for article in related_articles:
             article.time_ago = article.created_at.date()
 
@@ -123,7 +132,7 @@ def article_base(request, article_id, page_name):
             'read_time': article_data.read_time,
             'share_url': request.build_absolute_uri(),
             'related_articles': related_articles,
-            'related_articles_length': 0  # len(related_articles)
+            'related_articles_length': len(related_articles)
         }
 
         article_data.views += 1
