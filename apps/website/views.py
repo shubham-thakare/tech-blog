@@ -3,6 +3,9 @@ from django.http import Http404, HttpResponseRedirect
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.helpers.utils import get_host_uri_with_http
+from django.contrib.postgres.search import SearchRank, \
+    SearchVector, SearchQuery
+import re
 
 
 def index(request):
@@ -16,6 +19,39 @@ def index(request):
         'articles_length': len(articles)
     }
     return render(request, 'website/index.html', context)
+
+
+def search(request):
+    query = request.GET['query']
+    processed_query = re.sub(r'[^\w]', ' ', query)
+
+    if processed_query:
+        search_vector = SearchVector('title')
+
+        search_query = SearchQuery(processed_query)
+        processed_query = processed_query.split(' ')
+        for keyword in processed_query:
+            search_query |= SearchQuery(keyword)
+
+        search_rank = SearchRank(search_vector, search_query)
+
+        articles = Article.objects.annotate(search=search_vector) \
+            .filter(status='p', search=search_query)
+
+        articles = articles.annotate(rank=search_rank) \
+            .order_by('-rank')
+
+        for article in articles:
+            article.time_ago = article.created_at.date()
+    else:
+        articles = {}
+
+    context = {
+        'query': query,
+        'articles': articles,
+        'articles_length': len(articles)
+    }
+    return render(request, 'website/search.html', context)
 
 
 def privacy_policy(request):
@@ -93,6 +129,5 @@ def article_base(request, article_id, page_name):
         article_data.views += 1
         article_data.save()
         return render(request, f'website/articles/{page_name}.html', context)
-    except Exception as ex:
-        print(ex)
+    except Exception:
         raise Http404()

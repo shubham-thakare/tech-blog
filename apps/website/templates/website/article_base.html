@@ -30,7 +30,8 @@
             {# END Article Container #}
 
             {% for tag in tags %}
-            <a href="#" class="decoration-none mr-1">
+            {% csrf_token %}
+            <a href="{% url 'article_search' %}?query={{tag}}" class="decoration-none mr-1">
                 <h5 class="d-inline-block font-weight-light">
                     <span class="badge custom-badge p-2">{{tag}}</span>
                 </h5>
