@@ -40,7 +40,8 @@ SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", False)
 SECURE_BROWSER_XSS_FILTER = env.bool("SECURE_BROWSER_XSS_FILTER", True)
 
 # set hosts
-ALLOWED_HOSTS = ["www.setupfaq.com",
+ALLOWED_HOSTS = ["setupfaq.com",
+                 "www.setupfaq.com",
                  "18.188.191.243",
                  "ec2-18-188-191-243.us-east-2.compute.amazonaws.com"]
 if ENVIRONMENT == "dev":
