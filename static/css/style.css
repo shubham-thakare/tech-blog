@@ -69,6 +69,10 @@ code {
     box-shadow: none;
 }
 
+.btn.focus, .btn:focus{
+    box-shadow: none;
+}
+
 .navbar-brand, .nav-item a {
     color: #343a40;
 }
