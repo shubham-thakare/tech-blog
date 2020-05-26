@@ -25,7 +25,7 @@ class ArticlesSitemap(sitemaps.Sitemap):
     changefreq = 'monthly'
 
     def items(self):
-        return Article.objects.all().order_by('-last_updated')
+        return Article.objects.filter(status='p').order_by('-last_updated')
 
     def lastmod(self, item):
         return item.last_updated
