@@ -12,4 +12,7 @@ urlpatterns = [
     path('article/<int:article_id>/<str:page_name>',
          views.article_base,
          name='article_base'),
+    path('article/search',
+         views.search,
+         name='article_search'),
 ]
