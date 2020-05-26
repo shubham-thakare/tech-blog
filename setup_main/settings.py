@@ -76,8 +76,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 3rd party middleware
-    "corsheaders.middleware.CorsMiddleware",
-    "apps.website.middleware.AttachResponseHeaders"
+    "corsheaders.middleware.CorsMiddleware"
 ]
 
 TEMPLATES = [
