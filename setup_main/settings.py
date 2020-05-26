@@ -31,19 +31,19 @@ ENVIRONMENT = env.str("ENVIRONMENT")
 ADMIN_ENABLED = env.bool("ADMIN_ENABLED")
 IS_LOCAL = env.bool("IS_LOCAL")
 DEBUG = env.bool("DEBUG", False)
-SECURE_BROWSER_XSS_FILTER = True
 
-
-# load secrets
+# Security Variable
 SECRET_KEY = env.str("DJANGO_SECRET_KEY")
-
+SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", False)
+CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", False)
+SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", False)
+SECURE_BROWSER_XSS_FILTER = env.bool("SECURE_BROWSER_XSS_FILTER", True)
 
 # set hosts
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["18.188.191.243",
+                 "ec2-18-188-191-243.us-east-2.compute.amazonaws.com"]
 if ENVIRONMENT == "dev":
-    ALLOWED_HOSTS += ["localhost", "127.0.0.1", "*", '0.0.0.0']
-
-ALLOWED_HOSTS = ["*", "ec2-18-188-191-243.us-east-2.compute.amazonaws.com"]
+    ALLOWED_HOSTS += ["localhost", "127.0.0.1", '0.0.0.0']
 
 
 # Application definition
