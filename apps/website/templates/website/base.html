@@ -3,17 +3,31 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{% block title %}{% endblock %}</title>
+
+        <meta charset="utf-8" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
+        <meta content="SetupFAQ" name="apple-mobile-web-app-title">
+        <meta content="SetupFAQ" name="application-name">
+        <meta content="#343a40" name="theme-color">
+        <meta content="#343a40" name="msapplication-TileColor">
+        {% block blockbots %}<meta content="index, follow" name="robots">{% endblock %}
+
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
         <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="mask-icon" href="{% static 'images/favicon.ico' %}" color="#2271ff">
 
         {# Meta for public sharing #}
+        <meta content="unsafe-url" name="referrer">
+        <link href="{{share_url|default:_('https://www.setupfaq.com/')}}" rel="canonical">
         <meta
           name="keywords"
+          content="{{ public_keywords|default:_('setup,configuration,configure,installation,how to install,installing') }}"
+        />
+        <meta
+          name="news_keywords"
           content="{{ public_keywords|default:_('setup,configuration,configure,installation,how to install,installing') }}"
         />
         <meta
@@ -22,26 +36,45 @@
         />
 
         {# Facebook Sharing #}
-        <meta property="og:url" content="{{ public_url|default:_('https://www.setupfaq.com/') }}">
-        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ share_url|default:_('https://www.setupfaq.com/') }}">
+        <meta property="og:type" content="{{ page_type|default:_('website') }}">
         <meta property="og:title" content="{{ public_title|default:_('SetupFAQ') }}">
         <meta property="og:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
         <meta property="og:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}">
+        <meta property="og:image:secure" content="http://">
+        <meta property="og:image:alt" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
+        <meta property="og:locale" content="en-us">
+
+        {% if is_article %}
+        <meta content="{{published_time}}" property="article:published_time">
+        <meta content="{{modified_time}}" property="article:modified_time">
+        <meta content="post" property="article:section">
+        <meta content="https://www.setupfaq.com/" property="article:publisher">
+
+        {% for tag in tags %}
+        <meta content="{{tag}}" property="article:tag">
+        {% endfor %}
+        {% endif %}
 
         {# Twitter Sharing #}
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="{{ public_title|default:_('SetupFAQ') }}">
-        <meta name="twitter:description" content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}">
-        <meta name="twitter:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}">
+        <meta content="summary_large_image" name="twitter:card">
+        <meta content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}" name="twitter:image">
+        <meta content="{{ public_title|default:_('SetupFAQ') }}" name="twitter:title">
+        <meta content="{{ public_description|default:_('We are here to help you to get everything configured seamlessly.') }}" name="twitter:description">
         {# END Meta for public sharing #}
 
+        <link href="//fonts.googleapis.com" rel="preconnect" crossorigin="">
+        <link href="//cdnjs.cloudflare.com" rel="preconnect" crossorigin="">
+        <link href="//code.jquery.com" rel="preconnect" crossorigin="">
+        <link href="//cdn.jsdelivr.net" rel="preconnect" crossorigin="">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script rel="js" src="{% static 'js/bootstrap.min.js' %}"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" >
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-        {% block blockbots %}{% endblock %}
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167547653-1"></script>

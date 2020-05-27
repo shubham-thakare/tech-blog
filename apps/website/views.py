@@ -133,7 +133,11 @@ def article_base(request, article_id, page_name):
             'read_time': article_data.read_time,
             'share_url': request.build_absolute_uri(),
             'related_articles': related_articles,
-            'related_articles_length': len(related_articles)
+            'related_articles_length': len(related_articles),
+            'page_type': 'article',
+            'is_article': True,
+            'published_time': article_data.created_at,
+            'modified_time': article_data.last_updated
         }
 
         article_data.views += 1
