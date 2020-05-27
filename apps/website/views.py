@@ -23,8 +23,6 @@ def search_articles(query):
 
         search_rank = SearchRank(search_vector, search_query)
 
-        print(search_query)
-
         articles = Article.objects \
             .annotate(search=search_vector, rank=search_rank) \
             .filter(status='p', search=search_query) \
