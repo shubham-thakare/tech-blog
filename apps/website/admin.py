@@ -18,7 +18,29 @@ class ArticleAdminForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ['title', 'keywords', 'description', 'public_image', 'status']
+        fields = [
+            'page_name',
+            'title',
+            'keywords',
+            'description',
+            'public_image',
+            'status'
+        ]
+
+    def get_initial_for_field(self, field, field_name):
+        try:
+            # Adding existing html into the CKEditor
+            page_name = self.initial['page_name']
+            if page_name:
+                article_file_path = f'{get_article_dir_path()}' \
+                                    f'/{page_name}.html'
+                raw_html = read_article_html_text(article_file_path)
+                self.initial['content'] = raw_html
+        except Exception:
+            pass
+
+        return super(ArticleAdminForm, self) \
+            .get_initial_for_field(field, field_name)
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -29,13 +51,22 @@ class ArticleAdmin(admin.ModelAdmin):
     date_hierarchy = 'last_updated'
     ordering = ('-last_updated',)
 
-    # Check for existing html file
-    def change_view(self, request, object_id, form_url='', extra_context=None):
-        article = Article.objects.filter(id=object_id)[0]
-        article_file_path = f'{get_article_dir_path()}' \
-                            f'/{article.page_name}.html'
-        read_article_html_text(article_file_path)
-        return super().change_view(request, object_id, form_url, extra_context)
+    fieldsets = [
+        ['General Information', {
+            'fields': [
+                'title',
+                'keywords',
+                'description',
+                'public_image',
+                'status',
+                'content'
+            ]
+        }],
+        ['Template Page Information (Optional)', {
+            'classes': ['collapse'],
+            'fields': ['page_name'],
+        }],
+    ]
 
     # Save new or update existing model
     def save_model(self, request, obj, form, change):
