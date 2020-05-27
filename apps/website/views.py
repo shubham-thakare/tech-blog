@@ -12,7 +12,7 @@ def search_articles(query):
     processed_query = re.sub(r'[^\w.\-:;,]', ' ', query)
 
     if processed_query:
-        search_vector = SearchVector('title')
+        search_vector = SearchVector('title', 'keywords')
 
         search_query = SearchQuery(processed_query)
         processed_query = processed_query.split(' ')
