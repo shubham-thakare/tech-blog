@@ -21,9 +21,15 @@ from django.views.static import serve
 
 
 urlpatterns = [
-    path('', include('apps.website.urls'), name='website'),
-    path('admin/', admin.site.urls, name='admin'),
-    path('admin/', include('ckeditor_uploader.urls'), name='ckeditor'),
+    path('',
+         include('apps.website.urls'),
+         name='website'),
+    path('update/website/',
+         admin.site.urls,
+         name='admin'),
+    path('update/website/',
+         include('ckeditor_uploader.urls'),
+         name='ckeditor'),
     path(
         "robots.txt",
         TemplateView.as_view(template_name='robots.txt',
