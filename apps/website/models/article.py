@@ -10,7 +10,7 @@ STATUS_CHOICES = (
 
 
 class Article(models.Model):
-    page_name = models.CharField(max_length=500, null=True)
+    page_name = models.CharField(max_length=500, null=True, blank=True)
     title = models.CharField(max_length=500, null=False)
     keywords = models.CharField(max_length=1000, null=False)
     description = models.CharField(max_length=1000, null=False)
