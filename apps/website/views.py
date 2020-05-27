@@ -9,22 +9,25 @@ import re
 
 
 def search_articles(query):
-    processed_query = re.sub(r'[^\w]', ' ', query)
+    processed_query = re.sub(r'[^\w.\-:;,]', ' ', query)
 
     if processed_query:
         search_vector = SearchVector('title')
 
         search_query = SearchQuery(processed_query)
         processed_query = processed_query.split(' ')
-        for keyword in processed_query:
-            search_query |= SearchQuery(keyword)
+
+        if len(processed_query) > 1:
+            for keyword in processed_query:
+                search_query |= SearchQuery(keyword)
 
         search_rank = SearchRank(search_vector, search_query)
 
-        articles = Article.objects.annotate(search=search_vector) \
-            .filter(status='p', search=search_query)
+        print(search_query)
 
-        articles = articles.annotate(rank=search_rank) \
+        articles = Article.objects \
+            .annotate(search=search_vector, rank=search_rank) \
+            .filter(status='p', search=search_query) \
             .order_by('-rank')
 
         for article in articles:
