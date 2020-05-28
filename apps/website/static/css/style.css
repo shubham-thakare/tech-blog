@@ -42,6 +42,7 @@ pre {
     line-height: 1.45;
     background-color: #f6f8fa;
     border-radius: 3px;
+    box-shadow: 1px 1px 3px #bbb;
 }
 
 pre code {
