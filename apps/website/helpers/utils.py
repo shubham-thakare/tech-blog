@@ -81,6 +81,7 @@ def get_article_dir_path():
 
 
 def get_article_file_name(title: str):
+    timestamp = str(timezone.now().timestamp()).replace(".", "")
     return title \
         .replace('\'', '') \
         .replace('"', '') \
@@ -94,7 +95,7 @@ def get_article_file_name(title: str):
         .replace('?', '') \
         .replace('*', '') \
         .replace(' ', '-') \
-        .lower()
+        .lower() + '_' + timestamp
 
 
 def get_filename(filename: str):

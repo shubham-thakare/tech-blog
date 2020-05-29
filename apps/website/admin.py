@@ -62,7 +62,7 @@ class ArticleAdmin(admin.ModelAdmin):
                 'content'
             ]
         }],
-        ['Template Page Information (Optional)', {
+        ['Template Page Information (Don\'t play with it)', {
             'classes': ['collapse'],
             'fields': ['page_name'],
         }],
@@ -79,6 +79,9 @@ class ArticleAdmin(admin.ModelAdmin):
         # Get article file name and dir to save html file
         article_dir_path = get_article_dir_path()
         article_file_name = get_article_file_name(str(form['title'].value()))
+
+        if form["page_name"].value():
+            article_file_name = form["page_name"].value()
 
         # Delete an existing file
         remove_file(f'{article_dir_path}/{obj.page_name}.html')
