@@ -5,13 +5,5 @@ Disallow: /*.doc
 Disallow: /*.xls
 Disallow: /*.txt
 
-User-agent: Yandex
-Disallow: /admin
-Crawl-delay: 3
-
-User-agent: Googlebot
-Disallow: /admin
-Crawl-delay: 3
-
-Host: https://super.com
-Sitemap: https://super.com/sitemap.xml
+Host: https://www.setupfaq.com
+Sitemap: https://www.setupfaq.com/view/sitemap.xml
