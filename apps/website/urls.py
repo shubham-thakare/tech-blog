@@ -32,7 +32,7 @@ urlpatterns = [
          sitemap,
          {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
-    path('feed/rss.xml',
+    path('feeds/rss.xml',
          RSSFeed(),
          name='articles_rss_feed'),
 ]

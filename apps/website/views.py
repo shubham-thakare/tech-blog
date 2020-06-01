@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.helpers.utils import get_host_uri_with_http
@@ -101,7 +101,7 @@ def contact_us(request):
             )
             contact_details.save()
 
-            return HttpResponseRedirect('/view/contact-us')
+            return render(request, 'website/contact_us.html', {'sent': True})
 
     return render(request, 'website/contact_us.html', {
         'name': name,
