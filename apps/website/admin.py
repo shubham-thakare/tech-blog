@@ -1,6 +1,7 @@
 from django.contrib import admin
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
+from apps.website.models.comments import Comments
 from django.utils import timezone
 from django import forms
 from ckeditor_uploader.fields import RichTextUploadingFormField
@@ -159,8 +160,33 @@ class InboxAdmin(admin.ModelAdmin):
     actions = [mark_as_seen, mark_as_unseen]
 
 
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'comments', 'submitted_on', 'status']
+    ordering = ('-submitted_on',)
+    search_fields = ('name', 'email')
+    list_filter = ('submitted_on', 'status', 'article')
+    date_hierarchy = 'submitted_on'
+
+    # Update comments status to hide
+    def mark_as_hide(modeladmin, request, queryset):
+        queryset.update(status='HD')
+    mark_as_hide.short_description = "Mark selected comments as hide"
+
+    # Update comments status to show
+    def mark_as_show(modeladmin, request, queryset):
+        queryset.update(status='SH')
+    mark_as_show.short_description = "Mark selected comments as show"
+
+    # Deon't delete messages
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    actions = [mark_as_hide, mark_as_show]
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Inbox, InboxAdmin)
+admin.site.register(Comments, CommentsAdmin)
 
 # Globally disable delete selected
 admin.site.disable_action('delete_selected')
