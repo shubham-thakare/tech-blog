@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
+from apps.website.models.comments import Comments
 from apps.website.helpers.utils import get_host_uri_with_http
 from django.contrib.postgres.search import SearchRank, \
     SearchVector, SearchQuery
@@ -112,6 +113,10 @@ def contact_us(request):
 
 def article_base(request, article_id, page_name):
     try:
+        name = {'invalid': '', 'value': ''}
+        email = {'invalid': '', 'value': ''}
+        comments = {'invalid': '', 'value': ''}
+
         article_data = get_object_or_404(Article, id=article_id,
                                          status='p', page_name=page_name)
 
@@ -120,6 +125,43 @@ def article_base(request, article_id, page_name):
 
         for article in related_articles:
             article.time_ago = article.created_at.date()
+
+        if request.method == 'POST':
+            if not request.POST.get('name', ''):
+                name['invalid'] = 'is-invalid'
+
+            if request.POST.get('email') \
+                    and '@' not in request.POST['email'] \
+                    or '.' not in request.POST['email']:
+                email['invalid'] = 'is-invalid'
+
+            if not request.POST.get('comments', '') or \
+                    not len(request.POST['comments']) >= 0:
+                comments['invalid'] = 'is-invalid'
+
+            name['value'] = request.POST['name']
+            email['value'] = request.POST['email']
+            comments['value'] = request.POST['comments']
+
+            if not name['invalid'] and not email['invalid'] and \
+                    not comments['invalid']:
+                comment_details = Comments(
+                    article=article_data,
+                    name=str(name['value']).title(),
+                    email=email['value'],
+                    comments=comments['value']
+                )
+                comment_details.save()
+                return HttpResponseRedirect(f'{request.get_full_path()}'
+                                            f'#comments_start')
+
+        article_comments = Comments.objects \
+            .filter(article=article_id, status='SH') \
+            .order_by('-submitted_on')
+
+        for comment in article_comments:
+            comment.submitted_on = comment.submitted_on \
+                .strftime("%B %d %Y at %H:%M UTC")
 
         context = {
             'md_file': page_name,
@@ -137,7 +179,12 @@ def article_base(request, article_id, page_name):
             'page_type': 'article',
             'is_article': True,
             'published_time': article_data.created_at,
-            'modified_time': article_data.last_updated
+            'modified_time': article_data.last_updated,
+            'name': name,
+            'email': email,
+            'comments': comments,
+            'article_comments': article_comments,
+            'article_comments_length': len(article_comments),
         }
 
         article_data.views += 1
