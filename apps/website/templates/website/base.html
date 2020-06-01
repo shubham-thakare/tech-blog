@@ -14,7 +14,11 @@
         <meta content="SetupFAQ" name="application-name">
         <meta content="#e9ecef" name="theme-color">
         <meta content="#e9ecef" name="msapplication-TileColor">
-        {% block blockbots %}<meta content="index, follow" name="robots">{% endblock %}
+        {% block blockbots %}
+        <meta content="index, follow" name="robots">
+        <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        {% endblock %}
 
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
         <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
@@ -34,8 +38,9 @@
         />
         <meta
           name="description"
-          content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}"
+          content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}"
         />
+        <link rel="alternate" type="application/rss+xml" title="SetupFAQ » Feed" href="https://www.setupfaq.com/feeds/rss.xml">
 
         {# Facebook Sharing #}
         <meta property="og:url" content="{{ share_url|default:_('https://www.setupfaq.com/') }}">

@@ -2,6 +2,7 @@
 
 {% block title %}SetupFAQ | Contact Us{% endblock %}
 
+
 {% block content %}
 <div class="container mt-3 mb-3">
     <h1 class="display-md-5 sm-size">
@@ -19,6 +20,14 @@
         </div>
         {% endif %}
         <div class="form-row justify-content-center">
+            {% if not sent %}
+            <p class="text-md-center text-muted">
+                Please submit your feedback/queries about this site.
+                Your feedback will be helpful for us to make improvement in blog
+                <br class="d-none d-lg-block"/>
+                and we will also try to solve your queries if any.
+            </p>
+            {% endif %}
             <div class="col-lg-4 mb-3">
                 <label for="name">Name</label>
                 <input type="text" class="form-control {{name.invalid}}" id="name" name="name" value="{{name.value}}" autocomplete="off" maxlength="50" />
