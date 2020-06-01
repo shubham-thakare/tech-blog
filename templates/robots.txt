@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /*.pdf
+Disallow: /*.ppt
+Disallow: /*.doc
+Disallow: /*.xls
+Disallow: /*.txt
+
+Host: https://www.setupfaq.com
+Sitemap: https://www.setupfaq.com/view/sitemap.xml

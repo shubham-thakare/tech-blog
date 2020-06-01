@@ -1,0 +1,68 @@
+{% extends "./base.html" %}
+
+{% block title %}SetupFAQ | Searched for '{{query}}'{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+
+{% block content %}
+{% if articles_length >= 1 %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <h3 class="display-md-5 sm-size">
+                Search results for '{{query}}'
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}" class="d-flex">
+                    <img src="{{article.public_image}}" class="card-img-top" alt="" height="180px" width="260px" loading="lazy">
+                </a>
+                <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
+                    <div class="card-body">
+                        <h5 class="card-title sm-size">{{article.title|truncatechars:56}}</h5>
+                        <p class="card-text sm-size">
+                            <small class="text-muted">
+                                {{article.time_ago}}
+                                <b>&centerdot;</b>
+                                {{article.read_time}}
+                            </small>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="jumbotron jumbotron-fluid mb-0 bg-light" style="background: var(--custom-light-bg);">
+    <div class="container mt-md-5 mb-md-5 pt-md-5 pb-md-5">
+        <h1 class="display-3">
+            {% if not query %}
+            Please provide a valid keyword or phrase to search.
+            {% else %}
+            Sorry, we couldn’t find any article matching '{{query}}'.
+            {% endif %}
+        </h1>
+        <h1 class="lead">
+            <strong>Tips that may help you:</strong>
+        </h1>
+        <ul>
+            <li>
+                <h5 class="text-muted">
+                    Try to correct spelling mistakes
+                </h5>
+            </li>
+            <li>
+                <h5 class="text-muted">
+                    Try to search for more specific keywords or phrases
+                </h5>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

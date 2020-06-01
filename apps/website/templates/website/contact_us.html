@@ -1,0 +1,64 @@
+{% extends "./base.html" %}
+
+{% block title %}SetupFAQ | Contact Us{% endblock %}
+
+
+{% block content %}
+<div class="container mt-3 mb-3">
+    <h1 class="display-md-5 sm-size">
+        Contact Us
+    </h1>
+    <hr />
+    <form name="contact_us" method="post">
+        {% csrf_token %}
+        {% if sent %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Thank you for contacting us, We will try to respond to your email sooner.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        <div class="form-row justify-content-center">
+            {% if not sent %}
+            <p class="text-md-center text-muted">
+                Please submit your feedback/queries about this site.
+                Your feedback will be helpful for us to make improvement in blog
+                <br class="d-none d-lg-block"/>
+                and we will also try to resolve your queries if any.
+            </p>
+            {% endif %}
+            <div class="col-lg-4 mb-3">
+                <label for="name">Name</label>
+                <input type="text" class="form-control {{name.invalid}}" id="name" name="name" value="{{name.value}}" autocomplete="off" maxlength="50" />
+                <div class="invalid-feedback">
+                    Please provide your name.
+                </div>
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="col-lg-4 mb-3">
+                <label for="email">Email</label>
+                <input type="text" class="form-control {{email.invalid}}" id="email" name="email" value="{{email.value}}" autocomplete="off" maxlength="50" />
+                <div class="invalid-feedback">
+                    Please provide a valid email.
+                </div>
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="col-lg-4 mb-3">
+                <label for="message">Message</label>
+                <textarea class="form-control {{message.invalid}}" id="message" name="message" maxlength="1000" aria-multiline="true" rows="5">{{message.value}}</textarea>
+                <div class="invalid-feedback">
+                    Please provide your message.
+                    <br/>
+                    <i>The message must be at least 20 characters long.</i>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

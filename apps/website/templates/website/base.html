@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>{% block title %}SetupFAQ - We are here, to help you to get everything configured swimmingly.{% endblock %}</title>
+
+        <script data-ad-client="ca-pub-3669224183674237" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+        <meta charset="utf-8" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
+        <meta content="SetupFAQ" name="apple-mobile-web-app-title">
+        <meta content="SetupFAQ" name="application-name">
+        <meta content="#e9ecef" name="theme-color">
+        <meta content="#e9ecef" name="msapplication-TileColor">
+        {% block blockbots %}
+        <meta content="index, follow" name="robots">
+        <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        {% endblock %}
+
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="mask-icon" href="{% static 'images/favicon.ico' %}" color="#2271ff">
+
+        {# Meta for public sharing #}
+        <meta content="unsafe-url" name="referrer">
+        <link href="{{share_url|default:_('https://www.setupfaq.com/')}}" rel="canonical">
+        <meta
+          name="keywords"
+          content="{{ public_keywords|default:_('setup,configuration,configure,installation,how to install,installing') }}"
+        />
+        <meta
+          name="news_keywords"
+          content="{{ public_keywords|default:_('setup,configuration,configure,installation,how to install,installing') }}"
+        />
+        <meta
+          name="description"
+          content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}"
+        />
+        <link rel="alternate" type="application/rss+xml" title="SetupFAQ » Feed" href="https://www.setupfaq.com/feeds/rss.xml">
+
+        {# Facebook Sharing #}
+        <meta property="og:url" content="{{ share_url|default:_('https://www.setupfaq.com/') }}">
+        <meta property="og:type" content="{{ page_type|default:_('website') }}">
+        <meta property="og:title" content="{{ public_title|default:_('SetupFAQ') }}">
+        <meta property="og:description" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}">
+        <meta property="og:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}">
+        <meta property="og:image:secure" content="http://">
+        <meta property="og:image:alt" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}">
+        <meta property="og:locale" content="en-us">
+
+        {% if is_article %}
+        <meta content="{{published_time}}" property="article:published_time">
+        <meta content="{{modified_time}}" property="article:modified_time">
+        <meta content="post" property="article:section">
+        <meta content="https://www.setupfaq.com/" property="article:publisher">
+
+        {% for tag in tags %}
+        <meta content="{{tag}}" property="article:tag">
+        {% endfor %}
+        {% endif %}
+
+        {# Twitter Sharing #}
+        <meta content="summary_large_image" name="twitter:card">
+        <meta content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}" name="twitter:image">
+        <meta content="{{ public_title|default:_('SetupFAQ') }}" name="twitter:title">
+        <meta content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}" name="twitter:description">
+        {# END Meta for public sharing #}
+
+        <link href="//fonts.googleapis.com" rel="preconnect" crossorigin="">
+        <link href="//cdnjs.cloudflare.com" rel="preconnect" crossorigin="">
+        <link href="//code.jquery.com" rel="preconnect" crossorigin="">
+        <link href="//cdn.jsdelivr.net" rel="preconnect" crossorigin="">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script rel="js" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" >
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167547653-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-167547653-1');
+        </script>
+    </head>
+    <body>
+        {# Navbar #}
+        <nav class="navbar navbar-expand flex-md-row bg-light">
+            <a class="navbar-brand mr-0 mr-2" href="/" aria-label="SetupFAQ">
+                {# <img src="{% static 'images/brand_logo.png' %}" width="194" height="50" class="d-none d-md-inline-block align-top" alt=""> #}
+                <img src="{% static 'images/brand_logo_initial.png' %}" width="30" height="33" class="d-md-none d-sm-inline-block align-top brand-name-initial-logo" alt="">
+                {# <span class="brand-name-custom initial">S</span><span class="brand-name-custom d-none d-md-inline-block">etup.com</span> #}
+                <strong class="d-none d-md-inline-block">SetupFAQ</strong>
+            </a>
+            <div class="ml-auto col-lg-3 col-md-4 col-sm-8 pr-0 pl-5">
+                <form method="get" action="{% url 'article_search' %}">
+                    {% csrf_token %}
+                    <div class="input-group input-group-sm">
+                        <input
+                               type="search"
+                               name="query"
+                               value="{{query}}"
+                               class="form-control text-overflow-ellipsis border-right-0 rounded-0 custom-search"
+                               placeholder="Search"
+                               autocomplete=off
+                        />
+                        <button class="btn btn-sm bg-dark text-white border-left-0 rounded-0">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </nav>
+        {# END Navbar #}
+
+        {# Container #}
+        {% block content %}{% endblock %}
+        {# END Container #}
+
+        {# Footer #}
+        {% block footer %}
+        <div class="footer">
+            <div class="jumbotron jumbotron-fluid mb-0 bg-dark text-white">
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">SetupFAQ</h2></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 small mb-2">
+                            <a href="{% url 'contact_us' %}" class="text-white">Contact Us</a>
+                            &nbsp;|&nbsp;
+                            <a href="{% url 'privacy_policy' %}" class="text-white">Privacy Policy</a>
+                            &nbsp;|&nbsp;
+                            <a href="{% url 'terms_of_service' %}" class="text-white">Terms of Service</a>
+                            {# <a href="{% url 'articles_rss_feed' %}" target="_blank" class="text-white">RSS</a> #}
+                            {# <a href="{% url 'django.contrib.sitemaps.views.sitemap' %}" target="_blank" class="text-white">Sitemap</a> #}
+                        </div>
+                        <div class="col-md-6 mt-md-0 text-md-right small text-light">
+                            &copy; 2020 <a href="/" class="text-light">SetupFAQ</a>. All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        {# END Footer #}
+
+        {# Cookies Policy #}
+        {# <div class="alert alert-warning alert-dismissible fade show fixed-bottom rounded-0 mb-0 small text-justify" role="alert"> #}
+            {# We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it. #}
+            {# <button type="button" class="close" data-dismiss="alert" aria-label="Close"> #}
+                {# <span aria-hidden="true">&times;</span> #}
+            {# </button> #}
+        {# </div> #}
+        {# END Cookies Policy #}
+    </body>
+</html>

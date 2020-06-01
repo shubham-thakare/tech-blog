@@ -1,0 +1,154 @@
+{% extends "./base.html" %}
+{# {% load markdown_render %} #}
+
+{% block title %}{{public_title}} - SetupFAQ{% endblock %}
+
+{% block content %}
+<article class="container-fluid mt-3 mb-3">
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block text-left">
+            {# <img src="https://via.placeholder.com/160x600.png" /> #}
+        </div>
+        <div class="col-lg-8">
+            <h3 class="display-md-5">{{public_title}}</h3>
+            <h6 class="text-muted">{{public_description}}</h6>
+            <div class="row">
+                <div class="col-7 d-flex align-items-end">
+                    <span class="text-muted article-base-read-time">{{created_at}} <b>&centerdot;</b> {{read_time}}</span>
+                </div>
+                <div class="col-5 mt-sm-2 mt-md-0 text-right">
+                    <a href="https://twitter.com/share?url={{share_url}}" target="_blank"><i class="fa fa-twitter mr-1 large-icon align-bottom" alt="Twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{share_url}}" target="_blank"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom" alt="LinkedIn"></i></a>
+                    <a href="http://www.facebook.com/sharer/sharer.php?u={{share_url}}" target="_blank"><i class="fa fa-facebook-official mr-1 large-icon align-bottom" alt="Fb"></i></a>
+                    <a href="https://api.whatsapp.com/send?text={{share_url}}" target="_blank"><i class="fa fa-whatsapp large-icon align-bottom" alt="WhatsApp"></i></a>
+                </div>
+            </div>
+            <hr />
+            {# Article Container #}
+            {# {{ md_file | markdown | safe }} #}
+            {% block article_content %}{% endblock %}
+            {# END Article Container #}
+
+            {% for tag in tags %}
+            {% csrf_token %}
+            <a href="{% url 'article_search' %}?query={{tag}}" class="decoration-none mr-1">
+                <h5 class="d-inline-block font-weight-light">
+                    <span class="badge custom-badge p-2">{{tag}}</span>
+                </h5>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="col-lg-2 d-none d-lg-block text-right">
+            {# <img src="https://via.placeholder.com/160x600.png" /> #}
+        </div>
+    </div>
+</article>
+{% if related_articles_length >= 1 %}
+<div class="jumbotron jumbotron-fluid mb-0 pb-1 pt-3 bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block text-left"></div>
+            <div class="col-lg-8">
+                <h3>
+                    Related articles
+                </h3>
+                <div class="row">
+                    {% for article in related_articles %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}" class="d-flex">
+                                <img src="{{article.public_image}}" class="card-img-top" alt="" height="180px" width="260px" loading="lazy">
+                            </a>
+                            <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
+                                <div class="card-body">
+                                    <span class="card-title sm-size">{{article.title|truncatechars:56}}</span>
+                                    <p class="card-text sm-size">
+                                        <small class="text-muted">
+                                            {{article.time_ago}}
+                                            <b>&centerdot;</b>
+                                            {{article.read_time}}
+                                        </small>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-2 d-none d-lg-block text-left"></div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="container-fluid mb-3">
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block text-left"></div>
+        <div class="col-lg-8" id="comments_start">
+            {% if article_comments_length >= 1 %}
+            <div class="mt-2 mb-3">
+                {% if article_comments_length == 1 %}
+                <strong>{{article_comments_length}} COMMENT</strong>
+                {% else %}
+                <strong>{{article_comments_length}} COMMENTS</strong>
+                {% endif %}
+            </div>
+            {% for comment in article_comments %}
+            <div class="row">
+                <div class="col-md-7">
+                    <strong>{{comment.name}}</strong>
+                </div>
+                <div class="col-md-5 text-muted text-md-right">
+                    <small><small>{{comment.submitted_on}}</small></small>
+                </div>
+                <div class="col-12">
+                    <small>{{comment.comments|linebreaks}}</small>
+                    <hr />
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form name="comment_form" method="post" id="comments_form" action="#comments_form">
+                {% csrf_token %}
+                <div class="mt-2">
+                    <strong>LEAVE A REPLY</strong>
+                </div>
+                <div class="mb-md-2 text-muted">
+                    <small><small>All fields are required. Your email address will not be published.</small></small>
+                </div>
+                <div class="form-row justify-content-center">
+                    <div class="col-12 mb-3">
+                        <label for="comments">Comments</label>
+                        <textarea class="form-control {{comments.invalid}}" id="comments" name="comments" maxlength="2500" aria-multiline="true" rows="5">{{comments.value}}</textarea>
+                        <div class="invalid-feedback">
+                            Please provide your comments.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control {{name.invalid}}" id="name" name="name" value="{{name.value}}" autocomplete="off" maxlength="50" />
+                        <div class="invalid-feedback">
+                            Please provide your name.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control {{email.invalid}}" id="email" name="email" value="{{email.value}}" autocomplete="off" maxlength="50" />
+                        <div class="invalid-feedback">
+                            Please provide a valid email.
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                    <button class="btn btn-dark btn-block" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2 d-none d-lg-block text-left"></div>
+    </div>
+</div>
+{% endblock %}
