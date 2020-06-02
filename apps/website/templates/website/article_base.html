@@ -20,7 +20,6 @@
                         {{read_time}}
                         {% if author_id %}
                         <b>&centerdot;</b>
-                        By
                         <a href="{% url 'author_profile' author_id=author_id author_name=author_name %}">{{author_name}}</a>
                         {% endif %}
                     </span>

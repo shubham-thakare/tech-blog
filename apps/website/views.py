@@ -236,9 +236,17 @@ def author(request, author_id, author_name):
             article.time_ago = article.created_at.date()
 
         context = {
+            'public_keywords': f'{author_details.name},'
+                               f'{str(author_details.name).replace(" ", ",")}',
+            'public_title': author_details.name,
+            'public_description': author_details.bio,
+            'public_image': f'{get_host_uri_with_http(request)}'
+                            f'{author_details.dp}',
+            'share_url': request.build_absolute_uri(),
+            'page_type': 'profile',
             'author': author_details,
             'published_articles': articles,
-            'published_articles_length': len(articles)
+            'published_articles_length': len(articles),
         }
 
         return render(request, 'website/author_profile.html', context)
