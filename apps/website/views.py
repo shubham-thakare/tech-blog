@@ -3,7 +3,7 @@ from django.http import Http404, HttpResponseRedirect
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
-from apps.website.helpers.utils import get_host_uri_with_http
+from apps.website.helpers.utils import get_host_uri_with_http, time_ago
 from django.contrib.postgres.search import SearchRank, \
     SearchVector, SearchQuery
 import re
@@ -147,7 +147,7 @@ def article_base(request, article_id, page_name):
                     not comments['invalid']:
                 comment_details = Comments(
                     article=article_data,
-                    name=str(name['value']).title(),
+                    name=str(name['value']).title().strip(),
                     email=email['value'],
                     comments=comments['value']
                 )
@@ -160,8 +160,7 @@ def article_base(request, article_id, page_name):
             .order_by('-submitted_on')
 
         for comment in article_comments:
-            comment.submitted_on = comment.submitted_on \
-                .strftime("%B %d %Y at %H:%M UTC")
+            comment.submitted_on = time_ago(comment.submitted_on.timestamp())
 
         context = {
             'md_file': page_name,

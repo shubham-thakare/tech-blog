@@ -1,12 +1,10 @@
 from django.utils import timezone
-from django.templatetags.tz import register
 from django.shortcuts import render
 import math
 import readtime
 import os
 
 
-@register.simple_tag
 def time_ago(time):
     time_formats = [
         [60, 'seconds', 1],
@@ -26,13 +24,14 @@ def time_ago(time):
         [58060800000, 'centuries', 2903040000]
     ]
 
-    current_time = timezone.now().timestamp()
+    time = int(str(time).split('.')[0])
+    current_time = int(str(timezone.now().timestamp()).split('.')[0])
     seconds = (current_time - time)
     token = 'ago'
     list_choice = 1
 
     if seconds == 0:
-        return 'just now'
+        return 'Just now'
 
     if seconds < 0:
         seconds = math.fabs(seconds)
