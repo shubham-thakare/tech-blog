@@ -3,7 +3,8 @@ from django.http import Http404, HttpResponseRedirect
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
-from apps.website.helpers.utils import get_host_uri_with_http, time_ago
+from apps.website.helpers.utils import get_host_uri_with_http, \
+    time_ago, notify_on_email
 from django.contrib.postgres.search import SearchRank, \
     SearchVector, SearchQuery
 import re
@@ -96,11 +97,21 @@ def contact_us(request):
         if not name['invalid'] and not email['invalid'] and \
                 not message['invalid']:
             contact_details = Inbox(
-                name=name['value'],
+                name=str(name["value"]).title(),
                 email=email['value'],
                 message=message['value']
             )
             contact_details.save()
+
+            # Send notification mail for contact request
+            mail_subject = 'SetupFAQ - Someone is trying to contact you'
+            mail_body = f'***********************************************\n' \
+                        f'Visitor\'s Name: {str(name["value"]).title()}\n' \
+                        f'Visitor\'s Email: {email["value"]}\n' \
+                        f'Message:\n' \
+                        f'{message["value"]}\n' \
+                        f'***********************************************'
+            notify_on_email(mail_subject, mail_body)
 
             return render(request, 'website/contact_us.html', {'sent': True})
 
@@ -152,6 +163,20 @@ def article_base(request, article_id, page_name):
                     comments=comments['value']
                 )
                 comment_details.save()
+
+                # Send notification mail for comments
+                mail_subject = 'SetupFAQ - Someone has commented on article'
+                mail_body = f'*******************************************\n' \
+                            f'Article ID: {article_id}\n' \
+                            f'Article Title: {article_data.title}\n' \
+                            f'*******************************************\n' \
+                            f'Reader\'s Name: {str(name["value"]).title()}\n'\
+                            f'Reader\'s Email: {email["value"]}\n' \
+                            f'Comments:\n' \
+                            f'{comments["value"]}\n' \
+                            f'*******************************************'
+                notify_on_email(mail_subject, mail_body)
+
                 return HttpResponseRedirect(f'{request.get_full_path()}'
                                             f'#comments_start')
 
