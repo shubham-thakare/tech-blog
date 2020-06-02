@@ -13,10 +13,19 @@
             <h3 class="display-md-5">{{public_title}}</h3>
             <h6 class="text-muted">{{public_description}}</h6>
             <div class="row">
-                <div class="col-7 d-flex align-items-end">
-                    <span class="text-muted article-base-read-time">{{created_at}} <b>&centerdot;</b> {{read_time}}</span>
+                <div class="col-md-7 d-md-flex align-items-end">
+                    <span class="text-muted article-base-read-time">
+                        {{created_at}}
+                        <b>&centerdot;</b>
+                        {{read_time}}
+                        {% if author_id %}
+                        <b>&centerdot;</b>
+                        By
+                        <a href="{% url 'author_profile' author_id=author_id author_name=author_name %}">{{author_name}}</a>
+                        {% endif %}
+                    </span>
                 </div>
-                <div class="col-5 mt-sm-2 mt-md-0 text-right">
+                <div class="col-md-5 mt-sm-2 mt-md-0 text-md-right">
                     <a href="https://twitter.com/share?url={{share_url}}" target="_blank"><i class="fa fa-twitter mr-1 large-icon align-bottom" alt="Twitter"></i></a>
                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{share_url}}" target="_blank"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom" alt="LinkedIn"></i></a>
                     <a href="http://www.facebook.com/sharer/sharer.php?u={{share_url}}" target="_blank"><i class="fa fa-facebook-official mr-1 large-icon align-bottom" alt="Fb"></i></a>
@@ -49,9 +58,9 @@
         <div class="row">
             <div class="col-lg-2 d-none d-lg-block text-left"></div>
             <div class="col-lg-8">
-                <h3>
-                    Related articles
-                </h3>
+                <div class="mb-2">
+                    <strong>RELATED ARTICLES</strong>
+                </div>
                 <div class="row">
                     {% for article in related_articles %}
                     <div class="col-md-4 mb-3">

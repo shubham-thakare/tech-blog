@@ -3,6 +3,7 @@ from django.http import Http404, HttpResponseRedirect
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
+from apps.website.models.authors import Authors
 from apps.website.helpers.utils import get_host_uri_with_http, \
     time_ago, notify_on_email
 from django.contrib.postgres.search import SearchRank, \
@@ -211,8 +212,37 @@ def article_base(request, article_id, page_name):
             'article_comments_length': len(article_comments),
         }
 
+        if article_data.author:
+            context += {
+                'author_id': article_data.author.id,
+                'author_name': article_data.author.name,
+            }
+
         article_data.views += 1
         article_data.save()
         return render(request, f'website/articles/{page_name}.html', context)
+    except Exception:
+        raise Http404()
+
+
+def author(request, author_id, author_name):
+    try:
+        author_details = get_object_or_404(Authors, id=author_id,
+                                           name=author_name)
+        author_details.joined_at = author_details.joined_at.date()
+
+        articles = Article.objects.filter(author=author_details, status='p') \
+            .order_by('-created_at')
+
+        for article in articles:
+            article.time_ago = article.created_at.date()
+
+        context = {
+            'author': author_details,
+            'published_articles': articles,
+            'published_articles_length': len(articles)
+        }
+
+        return render(request, 'website/author_profile.html', context)
     except Exception:
         raise Http404()
