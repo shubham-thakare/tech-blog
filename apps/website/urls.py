@@ -2,11 +2,13 @@ from django.urls import path
 from django.contrib.sitemaps.views import sitemap
 from . import views
 from apps.website.feeds import RSSFeed
-from apps.website.sitemaps import StaticViewSitemap, ArticlesSitemap
+from apps.website.sitemaps import StaticViewSitemap, ArticlesSitemap, \
+    AuthorProfilesSitemap
 
 sitemaps = {
     'static': StaticViewSitemap,
-    'articles': ArticlesSitemap
+    'articles': ArticlesSitemap,
+    'profiles': AuthorProfilesSitemap
 }
 
 urlpatterns = [

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 STATUS_CHOICES = (
@@ -23,6 +24,9 @@ class Authors(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("author_profile", args=[self.id, self.name])
 
     class Meta:
         verbose_name_plural = "Authors"
