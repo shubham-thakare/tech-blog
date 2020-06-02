@@ -1,5 +1,7 @@
 from django.utils import timezone
 from django.shortcuts import render
+from django.core.mail import send_mail
+from django.conf import settings
 import math
 import readtime
 import os
@@ -125,3 +127,14 @@ def read_article_html_text(file_path: str):
 def get_host_uri_with_http(request):
     absolute_uri = str(request.build_absolute_uri()).split('/')
     return f'{absolute_uri[0]}//{absolute_uri[2]}'
+
+
+def notify_on_email(subject, message):
+    try:
+        subject = subject
+        message = message
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [settings.WEBSITE_ADMIN_EMAIL]
+        send_mail(subject, message, email_from, recipient_list)
+    except Exception:
+        pass
