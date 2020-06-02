@@ -1,6 +1,7 @@
 from django.contrib import sitemaps
 from django.urls import reverse
 from apps.website.models.article import Article
+from apps.website.models.authors import Authors
 
 
 class StaticViewSitemap(sitemaps.Sitemap):
@@ -29,3 +30,11 @@ class ArticlesSitemap(sitemaps.Sitemap):
 
     def lastmod(self, item):
         return item.last_updated
+
+
+class AuthorProfilesSitemap(sitemaps.Sitemap):
+    priority = 0.5
+    changefreq = 'yearly'
+
+    def items(self):
+        return Authors.objects.filter(status='AC').order_by('-name')
