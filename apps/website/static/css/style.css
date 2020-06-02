@@ -124,6 +124,14 @@ i.search-icon {
     font-size: 90%;
 }
 
+.shadow-inset {
+    box-shadow: 0px 0px 1px inset !important;
+}
+
+.dp-icon {
+    font-size: 70px !important;
+}
+
 @media screen and (max-width:575.98px) {
     .h1, h1 {
         font-size: 1.5rem !important;
