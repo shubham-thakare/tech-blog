@@ -213,10 +213,8 @@ def article_base(request, article_id, page_name):
         }
 
         if article_data.author:
-            context += {
-                'author_id': article_data.author.id,
-                'author_name': article_data.author.name,
-            }
+            context['author_id'] = article_data.author.id
+            context['author_name'] = article_data.author.name
 
         article_data.views += 1
         article_data.save()
