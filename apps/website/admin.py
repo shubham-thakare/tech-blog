@@ -188,7 +188,7 @@ class CommentsAdmin(admin.ModelAdmin):
 
 
 class AuthorsAdminForm(forms.ModelForm):
-    bio = RichTextUploadingFormField()
+    bio = RichTextUploadingFormField(config_name='authors_config')
 
     class Meta:
         model = Article
