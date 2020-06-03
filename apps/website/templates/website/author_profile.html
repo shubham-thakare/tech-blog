@@ -21,17 +21,14 @@
                 <div class="col-12 mt-2">
                     <span class="text-muted article-base-read-time">
                         {{author.profession}}
+                        <b>&centerdot;</b>
+                        Joined <span class="text-nowrap">{{author.joined_at}}</span>
                     </span>
                 </div>
                 <div class="col-12 mt-2">
-                    <span class="text-muted article-base-read-time">
-                        Joined on {{author.joined_at}}
-                    </span>
-                </div>
-                <div class="col-12 mt-2">
-                    <a href="https://twitter.com{{author.twitter_profile|default:_('#')}}" target="_blank"><i class="fa fa-twitter mr-1 large-icon align-bottom" alt="Twitter"></i></a>
-                    <a href="https://www.linkedin.com{{author.linkedIn_profile|default:_('#')}}" target="_blank"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom" alt="LinkedIn"></i></a>
-                    <a href="http://www.facebook.com{{author.facebook_profile|default:_('#')}}" target="_blank"><i class="fa fa-facebook-official mr-1 large-icon align-bottom" alt="Fb"></i></a>
+                    <a href="https://twitter.com{{author.twitter_profile|default:_('#')}}" target="_blank" class="mr-2"><i class="fa fa-twitter mr-1 large-icon align-bottom" alt="Twitter"></i></a>
+                    <a href="https://www.linkedin.com{{author.linkedIn_profile|default:_('#')}}" target="_blank" class="mr-2"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom" alt="LinkedIn"></i></a>
+                    <a href="http://www.facebook.com{{author.facebook_profile|default:_('#')}}" target="_blank" class="mr-2"><i class="fa fa-facebook-official mr-1 large-icon align-bottom" alt="Fb"></i></a>
                     <a href="http://www.github.com{{author.github_profile|default:_('#')}}" target="_blank"><i class="fa fa-github mr-1 large-icon align-bottom" alt="GitHub"></i></a>
                 </div>
             </div>
