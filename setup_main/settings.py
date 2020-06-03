@@ -220,6 +220,23 @@ CKEDITOR_CONFIGS = {
         'height': 600,
         'width': 'auto',
     },
+    'authors_config': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Source', 'RemoveFormat'],
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+             'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['Image']
+        ]
+    },
+    'authors_dp_config': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Image'],
+        ]
+    },
 }
 
 # GMAIL Settings
