@@ -8,13 +8,11 @@
         <div class="col-lg-2 d-none d-lg-block text-left"></div>
         <div class="col-lg-8">
             <div class="col-12 text-center pt-3 pb-3 bg-light shadow-inset">
+                {% if author.dp %}
                 <div class="col-12">
-                    {% if author.dp %}
                     <img src="{{author.dp}}" height="100px" width="100px" alt="dp" class="rounded-circle">
-                    {% else %}
-                    <i class="fa fa-user-circle-o dp-icon" alt="Dp"></i>
-                    {% endif %}
                 </div>
+                {% endif %}
                 <div class="col-12 mt-2">
                     <h3 class="display-md-5 mb-0">{{author.name}}</h3>
                 </div>
