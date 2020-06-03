@@ -187,7 +187,16 @@ class CommentsAdmin(admin.ModelAdmin):
     actions = [mark_as_hide, mark_as_show]
 
 
+class AuthorsAdminForm(forms.ModelForm):
+    bio = RichTextUploadingFormField()
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+
 class AuthorsAdmin(admin.ModelAdmin):
+    form = AuthorsAdminForm
     list_display = ['name', 'email', 'joined_at', 'status']
     ordering = ('-name',)
     search_fields = ('name', 'email')
