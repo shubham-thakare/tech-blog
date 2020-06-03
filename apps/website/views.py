@@ -4,10 +4,11 @@ from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
 from apps.website.models.authors import Authors
-from apps.website.helpers.utils import get_host_uri_with_http, \
+from apps.website.helpers.utils import get_host_uri_with_scheme, \
     time_ago, notify_on_email
 from django.contrib.postgres.search import SearchRank, \
     SearchVector, SearchQuery
+from urllib.parse import quote
 import re
 
 
@@ -194,11 +195,12 @@ def article_base(request, article_id, page_name):
             'tags': str(article_data.keywords).split(','),
             'public_title': article_data.title,
             'public_description': article_data.description,
-            'public_image': f'{get_host_uri_with_http(request)}'
+            'public_image': f'{get_host_uri_with_scheme(request)}'
                             f'{article_data.public_image}',
             'created_at': article_data.created_at.date(),
             'read_time': article_data.read_time,
-            'share_url': request.build_absolute_uri(),
+            'share_url': f'{get_host_uri_with_scheme(request)}'
+                            f'{quote(article_data.get_absolute_url())}',
             'related_articles': related_articles,
             'related_articles_length': len(related_articles),
             'page_type': 'article',
@@ -240,9 +242,10 @@ def author(request, author_id, author_name):
                                f'{str(author_details.name).replace(" ", ",")}',
             'public_title': author_details.name,
             'public_description': author_details.bio,
-            'public_image': f'{get_host_uri_with_http(request)}'
+            'public_image': f'{get_host_uri_with_scheme(request)}'
                             f'{author_details.dp}',
-            'share_url': request.build_absolute_uri(),
+            'share_url': f'{get_host_uri_with_scheme(request)}'
+                            f'{author_details.get_absolute_url()}',
             'page_type': 'profile',
             'author': author_details,
             'published_articles': articles,
