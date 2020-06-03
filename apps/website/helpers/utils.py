@@ -95,6 +95,7 @@ def get_article_file_name(title: str):
         .replace('\\', '') \
         .replace('?', '') \
         .replace('*', '') \
+        .replace('&', '') \
         .replace(' ', '-') \
         .lower() + '_' + timestamp
 
