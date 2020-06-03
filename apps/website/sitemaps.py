@@ -14,7 +14,6 @@ class StaticViewSitemap(sitemaps.Sitemap):
             'privacy_policy',
             'terms_of_service',
             'articles_rss_feed',
-            'django.contrib.sitemaps.views.sitemap'
         ]
 
     def location(self, item):
@@ -33,7 +32,7 @@ class ArticlesSitemap(sitemaps.Sitemap):
 
 
 class AuthorProfilesSitemap(sitemaps.Sitemap):
-    priority = 0.5
+    priority = 0.6
     changefreq = 'yearly'
 
     def items(self):
