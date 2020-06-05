@@ -1,20 +1,27 @@
 {% extends "website/base.html" %}
+{% load static %}
 
 {% block title %}Bad Request - SetupFAQ{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid mb-0 bg-light" style="background: var(--custom-light-bg);">
-    <div class="container mt-md-5 mb-md-5 pt-md-5 pb-md-5">
-        <h1 class="display-3 text-large">
-            <b>400</b>
-        </h1>
-        <h1 class="display-3 text-muted">
-            Bad Request
-        </h1>
-        <h5 class="text-muted">
-            Please try to search for some other solutions until we'll resolve this issue for you.
-        </h5>
+<div class="jumbotron jumbotron-fluid mb-0 mt-0 pt-md-5 pt-0 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{% static 'illustrations/400_illustration.svg' %}" class="error-illustrations"/>
+            </div>
+            <div class="col-md-7 d-flex align-items-center">
+                <div>
+                    <h1 class="text-large mb-3">
+                        <b>Sorry, we couldn't serve you with this request!</b>
+                    </h1>
+                    <h5 class="display-5 text-muted">
+                        Please explore some other solutions until will resolve this issue for you.
+                    </h5>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends "./base.html" %}
+{% load static %}
 
 {% block title %}Searched for '{{query}}' - SetupFAQ{% endblock %}
 
@@ -37,30 +38,39 @@
     </div>
 </div>
 {% else %}
-<div class="jumbotron jumbotron-fluid mb-0 bg-light" style="background: var(--custom-light-bg);">
-    <div class="container mt-md-5 mb-md-5 pt-md-5 pb-md-5">
-        <h1 class="display-3">
-            {% if not query %}
-            Please provide a valid keyword or phrase to search.
-            {% else %}
-            Sorry, we couldn’t find any article matching '{{query}}'.
-            {% endif %}
-        </h1>
-        <h1 class="lead">
-            <strong>Tips that may help you:</strong>
-        </h1>
-        <ul>
-            <li>
-                <h5 class="text-muted">
-                    Try to correct spelling mistakes
-                </h5>
-            </li>
-            <li>
-                <h5 class="text-muted">
-                    Try to search for more specific keywords or phrases
-                </h5>
-            </li>
-        </ul>
+<div class="jumbotron jumbotron-fluid mb-0 mt-0 pt-md-5 pt-0 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{% static 'illustrations/search_illustration.svg' %}" class="error-illustrations"/>
+            </div>
+            <div class="col-md-7 d-flex align-items-center">
+                <div>
+                    <h1 class="text-large mb-3">
+                        {% if not query %}
+                        Please provide a valid keyword or phrase to search.
+                        {% else %}
+                        Oops, we couldn’t find any blog matching '{{query}}'.
+                        {% endif %}
+                    </h1>
+                    <h5 class="lead">
+                        <strong>It may help you:</strong>
+                    </h5>
+                    <ul>
+                        <li>
+                            <h5 class="lead text-muted">
+                                Try to correct spelling mistakes
+                            </h5>
+                        </li>
+                        <li>
+                            <h5 class="lead text-muted">
+                                Try to search for more specific keywords or phrases
+                            </h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endif %}
