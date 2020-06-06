@@ -237,6 +237,11 @@ def author(request, author_id, author_name):
         for article in articles:
             article.time_ago = article.created_at.date()
 
+        try:
+            website_suffix = str(author_details.website).split('//')[1]
+        except Exception:
+            website_suffix = author_details.website
+
         context = {
             'public_keywords': f'{author_details.name},'
                                f'{str(author_details.name).replace(" ", ",")}',
@@ -250,7 +255,7 @@ def author(request, author_id, author_name):
             'author': author_details,
             'published_articles': articles,
             'published_articles_length': len(articles),
-            'website_suffix': str(author_details.website).split('//')[1],
+            'website_suffix': website_suffix,
         }
 
         return render(request, 'website/author_profile.html', context)
