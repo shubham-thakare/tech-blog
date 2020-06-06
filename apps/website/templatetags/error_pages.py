@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag
 def random_articles():
-    articles = Article.objects.all().order_by('?')[:3]
+    articles = Article.objects.filter(status="p").order_by('?')[:3]
 
     for article in articles:
         article.time_ago = article.created_at.date()
