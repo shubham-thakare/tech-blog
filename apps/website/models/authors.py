@@ -24,6 +24,7 @@ class Authors(models.Model):
     facebook_profile = models.CharField(max_length=50, null=True, blank=True)
     twitter_profile = models.CharField(max_length=50, null=True, blank=True)
     github_profile = models.CharField(max_length=50, null=True, blank=True)
+    website = models.CharField(max_length=50, null=True, blank=True)
     profession = models.CharField(max_length=100, null=False)
     bio = models.TextField(max_length=3000, null=False)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=1,

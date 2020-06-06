@@ -23,19 +23,25 @@
                         Joined <span class="text-nowrap">{{author.joined_at}}</span>
                     </span>
                 </div>
+                {% if author.website %}
+                <div class="col-12 d-flex justify-content-center align-items-center mt-md-2 mt-1 article-base-read-time text-muted">
+                    <i class="fa fa-link mr-1 align-bottom" alt="Website"></i>
+                    <a href="{{author.website}}" target="_blank" rel="external nofollow noopener" class="mr-2">{{website_suffix}}</a>
+                </div>
+                {% endif %}
                 {% if author.twitter_profile or author.linkedIn_profile or author.facebook_profile or author.github_profile %}
                 <div class="col-12 mt-2">
                     {% if author.twitter_profile %}
-                    <a href="https://twitter.com{{author.twitter_profile|default:_('#')}}" target="_blank" class="mr-2"><i class="fa fa-twitter mr-1 large-icon align-bottom" alt="Twitter"></i></a>
+                    <a href="https://twitter.com{{author.twitter_profile|default:_('#')}}" target="_blank" rel="external nofollow noopener" class="mr-2"><i class="fa fa-twitter mr-1 large-icon align-bottom" alt="Twitter"></i></a>
                     {% endif %}
                     {% if author.linkedIn_profile %}
-                    <a href="https://www.linkedin.com{{author.linkedIn_profile|default:_('#')}}" target="_blank" class="mr-2"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom" alt="LinkedIn"></i></a>
+                    <a href="https://www.linkedin.com{{author.linkedIn_profile|default:_('#')}}" rel="external nofollow noopener" target="_blank" class="mr-2"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom" alt="LinkedIn"></i></a>
                     {% endif %}
                     {% if author.facebook_profile %}
-                    <a href="http://www.facebook.com{{author.facebook_profile|default:_('#')}}" target="_blank" class="mr-2"><i class="fa fa-facebook-official mr-1 large-icon align-bottom" alt="Fb"></i></a>
+                    <a href="http://www.facebook.com{{author.facebook_profile|default:_('#')}}" rel="external nofollow noopener" target="_blank" class="mr-2"><i class="fa fa-facebook-official mr-1 large-icon align-bottom" alt="Fb"></i></a>
                     {% endif %}
                     {% if author.github_profile %}
-                    <a href="http://www.github.com{{author.github_profile|default:_('#')}}" target="_blank"><i class="fa fa-github mr-1 large-icon align-bottom" alt="GitHub"></i></a>
+                    <a href="http://www.github.com{{author.github_profile|default:_('#')}}" rel="external nofollow noopener" target="_blank"><i class="fa fa-github mr-1 large-icon align-bottom" alt="GitHub"></i></a>
                     {% endif %}
                 </div>
                 {% endif %}
@@ -79,7 +85,7 @@
                             </a>
                             <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
                                 <div class="card-body">
-                                    <span class="card-title sm-size">{{article.title|truncatechars:56}}</span>
+                                    <span class="card-title sm-size truncate-second-line">{{article.title}}</span>
                                     <p class="card-text sm-size">
                                         <small class="text-muted">
                                             {{article.time_ago}}

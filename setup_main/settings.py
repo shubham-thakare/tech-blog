@@ -96,6 +96,8 @@ TEMPLATES = [
             'libraries': {
                 'website_settings':
                     'apps.website.templatetags.website_settings',
+                'error_pages':
+                    'apps.website.templatetags.error_pages',
             },
         },
     },

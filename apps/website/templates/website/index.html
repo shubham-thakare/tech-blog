@@ -30,7 +30,7 @@
                 </a>
                 <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
                     <div class="card-body">
-                        <h5 class="card-title sm-size">{{article.title|truncatechars:56}}</h5>
+                        <h5 class="card-title sm-size truncate-second-line">{{article.title}}</h5>
                         <p class="card-text sm-size">
                             <small class="text-muted">
                                 {{article.time_ago}}
