@@ -250,6 +250,7 @@ def author(request, author_id, author_name):
             'author': author_details,
             'published_articles': articles,
             'published_articles_length': len(articles),
+            'website_suffix': str(author_details.website).split('//')[1],
         }
 
         return render(request, 'website/author_profile.html', context)

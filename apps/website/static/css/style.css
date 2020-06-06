@@ -157,6 +157,14 @@ i.search-icon {
     max-width: 200px;
 }
 
+.truncate-second-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 @media screen and (max-width:575.98px) {
     .h1, h1 {
         font-size: 1.5rem !important;

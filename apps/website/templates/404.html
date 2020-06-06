@@ -1,10 +1,11 @@
 {% extends "website/base.html" %}
+{% load error_pages %}
 
 {% block title %}Page Not Found - SetupFAQ{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid mb-0 mt-0 pt-md-5 pt-0 bg-light">
+<div class="jumbotron jumbotron-fluid mb-0 mt-0 pt-0 pb-0 bg-white">
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -13,14 +14,51 @@
             <div class="col-md-7 d-flex align-items-center">
                 <div>
                     <h1 class="text-large mb-3">
-                        <b>Oops, we couldn’t find this page!</b>
+                        <b>Sorry, we couldn’t find this page!</b>
                     </h1>
                     <h5 class="display-5 text-muted">
-                        But don't worry you can search for some other solutions.
+                        But don't worry you can explore some other solutions.
                     </h5>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% random_articles as articles_obj %}
+{% if articles_obj.articles_length >= 1 %}
+<div class="jumbotron jumbotron-fluid mb-0 pb-1 pt-3 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-2">
+                    <strong>YOU MAY LIKE</strong>
+                </div>
+                <div class="row">
+                    {% for article in articles_obj.articles %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}" class="d-flex">
+                                <img src="{{article.public_image}}" class="card-img-top" alt="" height="180px" width="260px" loading="lazy">
+                            </a>
+                            <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
+                                <div class="card-body">
+                                    <span class="card-title sm-size truncate-second-line">{{article.title}}</span>
+                                    <p class="card-text sm-size">
+                                        <small class="text-muted">
+                                            {{article.time_ago}}
+                                            <b>&centerdot;</b>
+                                            {{article.read_time}}
+                                        </small>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
