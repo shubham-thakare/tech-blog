@@ -49,7 +49,7 @@
         <meta property="og:type" content="{{ page_type|default:_('website') }}">
         <meta property="og:title" content="{{ public_title|default:_('SetupFAQ') }}">
         <meta property="og:description" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}">
-        <meta property="og:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}">
+        <meta property="og:image" content="{{ public_image|default:_('/static/images/public_preview.jpg') }}">
         <meta property="og:image:alt" content="{{ public_description|default:_('website logo') }}">
         <meta property="og:locale" content="en-us">
 
@@ -66,7 +66,7 @@
 
         {# Twitter Sharing #}
         <meta content="summary_large_image" name="twitter:card">
-        <meta content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}" name="twitter:image">
+        <meta content="{{ public_image|default:_('/static/images/public_preview.jpg') }}" name="twitter:image">
         <meta content="{{ public_title|default:_('SetupFAQ') }}" name="twitter:title">
         <meta content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}" name="twitter:description">
         {# END Meta for public sharing #}
