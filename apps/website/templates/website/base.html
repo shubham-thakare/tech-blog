@@ -14,8 +14,8 @@
         <meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
         <meta content="SetupFAQ" name="apple-mobile-web-app-title">
         <meta content="SetupFAQ" name="application-name">
-        <meta content="#e9ecef" name="theme-color">
-        <meta content="#e9ecef" name="msapplication-TileColor">
+        <meta content="#343a40" name="theme-color">
+        <meta content="#343a40" name="msapplication-TileColor">
         {% block blockbots %}
         <meta content="index, follow" name="robots">
         <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -25,7 +25,7 @@
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
         <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
         <link rel="apple-touch-icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
-        <link rel="mask-icon" href="{% static 'images/favicon.ico' %}" color="#2271ff">
+        <link rel="mask-icon" href="{% static 'images/favicon.ico' %}" color="#343a40">
 
         {# Meta for public sharing #}
         <meta content="unsafe-url" name="referrer">
@@ -42,7 +42,7 @@
           name="description"
           content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}"
         />
-        <link rel="alternate" type="application/rss+xml" title="SetupFAQ » Feed" href="https://www.setupfaq.com/feeds/rss.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed - SetupFAQ" href="https://www.setupfaq.com/feeds/rss.xml">
 
         {# Facebook Sharing #}
         <meta property="og:url" content="{{ share_url|default:_('https://www.setupfaq.com/') }}">
@@ -50,8 +50,7 @@
         <meta property="og:title" content="{{ public_title|default:_('SetupFAQ') }}">
         <meta property="og:description" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}">
         <meta property="og:image" content="{{ public_image|default:_('https://www.setupfaq.com/static/images/public_preview.jpg') }}">
-        <meta property="og:image:secure" content="http://">
-        <meta property="og:image:alt" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly.') }}">
+        <meta property="og:image:alt" content="{{ public_description|default:_('website logo') }}">
         <meta property="og:locale" content="en-us">
 
         {% if is_article %}
