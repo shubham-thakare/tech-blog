@@ -165,6 +165,10 @@ i.search-icon {
     -webkit-box-orient: vertical;
 }
 
+.object-fit-cover {
+    object-fit: cover;
+}
+
 @media screen and (max-width:575.98px) {
     .h1, h1 {
         font-size: 1.5rem !important;
