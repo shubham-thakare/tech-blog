@@ -33,7 +33,7 @@ class ArticlesSitemap(sitemaps.Sitemap):
 
 class AuthorProfilesSitemap(sitemaps.Sitemap):
     priority = 0.6
-    changefreq = 'yearly'
+    changefreq = 'monthly'
 
     def items(self):
-        return Authors.objects.filter(status='AC').order_by('-name')
+        return Authors.objects.filter(status='AC').order_by('-joined_at')
