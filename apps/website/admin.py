@@ -3,6 +3,7 @@ from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
 from apps.website.models.authors import Authors
+from apps.website.models.settings import WebsiteSettings
 from django.utils import timezone
 from django import forms
 from ckeditor_uploader.fields import RichTextUploadingFormField
@@ -220,10 +221,19 @@ class AuthorsAdmin(admin.ModelAdmin):
     actions = [mark_as_inactive, mark_as_active]
 
 
+class WebsiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ['under_maintenance']
+
+    # Deon't delete messages
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Inbox, InboxAdmin)
 admin.site.register(Comments, CommentsAdmin)
 admin.site.register(Authors, AuthorsAdmin)
+admin.site.register(WebsiteSettings, WebsiteSettingsAdmin)
 
 # Globally disable delete selected
 admin.site.disable_action('delete_selected')
