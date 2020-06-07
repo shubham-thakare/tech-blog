@@ -45,30 +45,34 @@
         <link rel="alternate" type="application/rss+xml" title="RSS Feed - SetupFAQ" href="https://www.setupfaq.com/feeds/rss.xml">
 
         {# Facebook Sharing #}
+        <meta property="og:site_name" content="SetupFAQ" />
         <meta property="og:url" content="{{ share_url|default:_('https://www.setupfaq.com/') }}">
         <meta property="og:type" content="{{ page_type|default:_('website') }}">
-        <meta property="og:title" content="{{ public_title|default:_('SetupFAQ') }}">
-        <meta property="og:description" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}">
+        <meta property="og:title" content="{{ public_title|default:_('SetupFAQ - We are here, to help you to get everything configured swimmingly.') }}">
+        <meta property="og:description" content="{{ public_description|default:_('This is a blog for how-to guides, tutorials, installations, and so on.') }}">
         <meta property="og:image" content="{{ public_image|default:_('/static/images/public_preview.jpg') }}">
         <meta property="og:image:alt" content="{{ public_description|default:_('website logo') }}">
         <meta property="og:locale" content="en-us">
+        <meta property="article:publisher" content="https://www.facebook.com/setupfaq">
 
         {% if is_article %}
-        <meta content="{{published_time}}" property="article:published_time">
-        <meta content="{{modified_time}}" property="article:modified_time">
-        <meta content="post" property="article:section">
-        <meta content="https://www.setupfaq.com/" property="article:publisher">
+        <meta property="article:published_time" content="{{published_time}}">
+        <meta property="article:modified_time" content="{{modified_time}}">
+        <meta property="article:section" content="post">
 
         {% for tag in tags %}
-        <meta content="{{tag}}" property="article:tag">
+        <meta property="article:tag" content="{{tag}}">
         {% endfor %}
         {% endif %}
 
         {# Twitter Sharing #}
-        <meta content="summary_large_image" name="twitter:card">
-        <meta content="{{ public_image|default:_('/static/images/public_preview.jpg') }}" name="twitter:image">
-        <meta content="{{ public_title|default:_('SetupFAQ') }}" name="twitter:title">
-        <meta content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}" name="twitter:description">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ public_title|default:_('SetupFAQ') }}">
+        <meta name="twitter:description" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}">
+        <meta name="twitter:image" content="{{ public_image|default:_('/static/images/public_preview.jpg') }}">
+        <meta name="twitter:site" content="@setupfaq"/>
+        <meta name="twitter:domain" content="SetupFAQ"/>
+        <meta name="twitter:creator" content="@setupfaq"/>
         {# END Meta for public sharing #}
 
         <link href="//fonts.googleapis.com" rel="preconnect" crossorigin="">
