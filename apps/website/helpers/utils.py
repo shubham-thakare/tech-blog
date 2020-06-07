@@ -84,26 +84,26 @@ def get_article_dir_path():
 def get_article_file_name(title: str):
     timestamp = str(timezone.now().timestamp()).replace(".", "")
     return title \
-        .replace('\'', '') \
-        .replace('"', '') \
-        .replace('.', '') \
-        .replace('!', '') \
-        .replace('<', '') \
-        .replace('>', '') \
-        .replace(':', '') \
-        .replace('/', '') \
-        .replace('\\', '') \
-        .replace('?', '') \
-        .replace('*', '') \
-        .replace('&', '') \
-        .replace(' ', '-') \
-        .lower() + '_' + timestamp
+               .replace('\'', '') \
+               .replace('"', '') \
+               .replace('.', '') \
+               .replace('!', '') \
+               .replace('<', '') \
+               .replace('>', '') \
+               .replace(':', '') \
+               .replace('/', '') \
+               .replace('\\', '') \
+               .replace('?', '') \
+               .replace('*', '') \
+               .replace('&', '') \
+               .replace(' ', '-') \
+               .lower() + '_' + timestamp
 
 
 def get_filename(filename: str):
     filename = filename.split('.')
     filename = f'{str(timezone.now().timestamp()).replace(".", "")}' \
-               f'.{filename[len(filename)-1]}'
+               f'.{filename[len(filename) - 1]}'
     return filename
 
 
@@ -130,12 +130,17 @@ def get_host_uri_with_scheme(request):
     return f'{absolute_uri[0]}//{absolute_uri[2]}'
 
 
-def notify_on_email(subject, message):
+def notify_on_email(subject, message, other_recipients=[]):
     try:
         subject = subject
         message = message
         email_from = settings.EMAIL_HOST_USER
-        recipient_list = [settings.WEBSITE_ADMIN_EMAIL]
-        send_mail(subject, message, email_from, recipient_list)
+        recipient_list = list(set([settings.WEBSITE_ADMIN_EMAIL])
+                              | set(other_recipients))
+        send_mail(subject=subject,
+                  message=None,
+                  html_message=message,
+                  from_email=email_from,
+                  recipient_list=recipient_list)
     except Exception:
         pass
