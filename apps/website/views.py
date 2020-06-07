@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
+from django.template.loader import render_to_string
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
@@ -107,12 +108,13 @@ def contact_us(request):
 
             # Send notification mail for contact request
             mail_subject = 'SetupFAQ - Someone is trying to contact you'
-            mail_body = f'***********************************************\n' \
-                        f'Visitor\'s Name: {str(name["value"]).title()}\n' \
-                        f'Visitor\'s Email: {email["value"]}\n' \
-                        f'Message:\n' \
-                        f'{message["value"]}\n' \
-                        f'***********************************************'
+            email_context = {
+                'visitor_name': str(name["value"]).title(),
+                'visitor_email': email["value"],
+                'message': message["value"]
+            }
+            mail_body = render_to_string('email/contact_email.html',
+                                         email_context)
             notify_on_email(mail_subject, mail_body)
 
             return render(request, 'website/contact_us.html', {'sent': True})
@@ -167,17 +169,18 @@ def article_base(request, article_id, page_name):
                 comment_details.save()
 
                 # Send notification mail for comments
+                email_context = {
+                    'blog_link': f'{get_host_uri_with_scheme(request)}'
+                                 f'{article_data.get_absolute_url()}'
+                                 f'#comments_start',
+                    'blog_name': article_data.title,
+                    'author_name': article_data.author.name,
+                }
                 mail_subject = 'SetupFAQ - Someone has commented on article'
-                mail_body = f'*******************************************\n' \
-                            f'Article ID: {article_id}\n' \
-                            f'Article Title: {article_data.title}\n' \
-                            f'*******************************************\n' \
-                            f'Reader\'s Name: {str(name["value"]).title()}\n'\
-                            f'Reader\'s Email: {email["value"]}\n' \
-                            f'Comments:\n' \
-                            f'{comments["value"]}\n' \
-                            f'*******************************************'
-                notify_on_email(mail_subject, mail_body)
+                mail_body = render_to_string('email/comment_email.html',
+                                             email_context)
+                notify_on_email(mail_subject, mail_body,
+                                other_recipients=[article_data.author.email])
 
                 return HttpResponseRedirect(f'{request.get_full_path()}'
                                             f'#comments_start')
