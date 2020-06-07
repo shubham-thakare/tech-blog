@@ -176,7 +176,8 @@ def article_base(request, article_id, page_name):
                     'blog_name': article_data.title,
                     'author_name': article_data.author.name,
                 }
-                mail_subject = 'SetupFAQ - Someone has commented on article'
+                mail_subject = 'SetupFAQ - ' \
+                               'Somebody has just commented on your article'
                 mail_body = render_to_string('email/comment_email.html',
                                              email_context)
                 notify_on_email(mail_subject, mail_body,
