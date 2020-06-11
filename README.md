@@ -1,5 +1,5 @@
-# Setup.com
-We are here to help you to install software seamlessly in your machine
+# SetupFAQ
+We are here, to help you to get everything configured swimmingly.
 
 ### References
 1. [JS library: showdown for rendering md files](https://github.com/showdownjs/showdown)
