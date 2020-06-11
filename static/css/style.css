@@ -169,6 +169,26 @@ i.search-icon {
     object-fit: cover;
 }
 
+i.fa.fa-twitter customize {
+    color: #1da1f2;
+}
+
+i.fa.fa-linkedin-square customize {
+    color: #0f73b0;
+}
+
+i.fa.fa-facebook-official customize {
+    color: #3a5898;
+}
+
+i.fa.fa-rss customize {
+    color: #f49b39;
+}
+
+i.fa.fa-whatsapp customize {
+    color: #59a959;
+}
+
 @media screen and (max-width:575.98px) {
     .h1, h1 {
         font-size: 1.5rem !important;
