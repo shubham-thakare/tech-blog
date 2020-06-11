@@ -156,14 +156,14 @@
         {% block footer %}
         <div class="footer">
             <div class="jumbotron jumbotron-fluid mb-0 text-white bg-dark">
-                <div class="container">
+                <div class="container text-md-left text-center">
                     <div class="row mb-2">
                         <div class="col-12">
                             <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">SetupFAQ</h2></a>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6 small mb-2">
+                        <div class="col-12 mt-md-0 small text-light">
                             <a href="{% url 'contact_us' %}" class="text-white">Contact Us</a>
                             &nbsp;|&nbsp;
                             <a href="{% url 'privacy_policy' %}" class="text-white">Privacy Policy</a>
@@ -172,8 +172,23 @@
                             {# <a href="{% url 'articles_rss_feed' %}" target="_blank" class="text-white">RSS</a> #}
                             {# <a href="{% url 'django.contrib.sitemaps.views.sitemap' %}" target="_blank" class="text-white">Sitemap</a> #}
                         </div>
-                        <div class="col-md-6 mt-md-0 text-md-right small text-light">
+                        <div class="col-md-6 small mt-md-3 mt-2">
                             &copy; 2020 <a href="/" class="text-light">SetupFAQ</a>. All rights reserved.
+                        </div>
+                        <div class="col-md-6 text-md-right small text-light mt-md-3 mt-2">
+                            <a href="https://twitter.com/setupfaq" target="_blank" rel="external nofollow noopener" title="Follow us on Twitter">
+                                <i class="fa fa-twitter mr-2 large-icon align-bottom" alt="Twitter"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/company/setupfaq" target="_blank" rel="external nofollow noopener" title="Follow us on LinkedIn">
+                                <i class="fa fa-linkedin-square mr-2 large-icon align-bottom" alt="LinkedIn"></i>
+                            </a>
+                            <a href="http://www.facebook.com/setupfaq" target="_blank" rel="external nofollow noopener" title="Follow us on Facebook">
+                                <i class="fa fa-facebook-official large-icon align-bottom" alt="Fb"></i>
+                            </a>
+                            &nbsp;&centerdot;&nbsp;
+                            <a href="{% url 'articles_rss_feed' %}" target="_blank" title="RSS Feed">
+                                <i class="fa fa-rss mr-2 large-icon align-bottom" alt="RSS"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
