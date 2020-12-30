@@ -5,15 +5,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-        <title>{% block title %}SetupFAQ - We are here, to help you to get everything configured swimmingly.{% endblock %}</title>
-
-        <script data-ad-client="ca-pub-8209145934233028" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <title>{% block title %}TechBlog - We are here, to help you to get everything configured swimmingly.{% endblock %}</title>
 
         <meta charset="utf-8" />
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
-        <meta content="SetupFAQ" name="apple-mobile-web-app-title">
-        <meta content="SetupFAQ" name="application-name">
+        <meta content="TechBlog" name="apple-mobile-web-app-title">
+        <meta content="TechBlog" name="application-name">
         <meta content="#343a40" name="theme-color">
         <meta content="#343a40" name="msapplication-TileColor">
         {% block blockbots %}
@@ -29,7 +27,7 @@
 
         {# Meta for public sharing #}
         <meta content="unsafe-url" name="referrer">
-        <link href="{{share_url|default:_('https://www.setupfaq.com/')}}" rel="canonical">
+        <link href="{{share_url|default:_('https://www.TechBlog.com/')}}" rel="canonical">
         <meta
           name="keywords"
           content="{{ public_keywords|default:_('setup,configuration,configure,installation,how to install,installing') }}"
@@ -42,18 +40,18 @@
           name="description"
           content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}"
         />
-        <link rel="alternate" type="application/rss+xml" title="RSS Feed - SetupFAQ" href="https://www.setupfaq.com/feeds/rss.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed - TechBlog" href="https://www.TechBlog.com/feeds/rss.xml">
 
         {# Facebook Sharing #}
-        <meta property="og:site_name" content="SetupFAQ" />
-        <meta property="og:url" content="{{ share_url|default:_('https://www.setupfaq.com/') }}">
+        <meta property="og:site_name" content="TechBlog" />
+        <meta property="og:url" content="{{ share_url|default:_('https://www.TechBlog.com/') }}">
         <meta property="og:type" content="{{ page_type|default:_('website') }}">
-        <meta property="og:title" content="{{ public_title|default:_('SetupFAQ - We are here, to help you to get everything configured swimmingly.') }}">
+        <meta property="og:title" content="{{ public_title|default:_('TechBlog - We are here, to help you to get everything configured swimmingly.') }}">
         <meta property="og:description" content="{{ public_description|default:_('This is a blog for how-to guides, tutorials, installations, and so on.') }}">
         <meta property="og:image" content="{{ public_image|default:_('/static/images/public_preview.jpg') }}">
         <meta property="og:image:alt" content="{{ public_description|default:_('website logo') }}">
         <meta property="og:locale" content="en-us">
-        <meta property="article:publisher" content="https://www.facebook.com/setupfaq">
+        <meta property="article:publisher" content="https://www.facebook.com/TechBlog">
 
         {% if is_article %}
         <meta property="article:published_time" content="{{published_time}}">
@@ -67,12 +65,12 @@
 
         {# Twitter Sharing #}
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="{{ public_title|default:_('SetupFAQ') }}">
+        <meta name="twitter:title" content="{{ public_title|default:_('TechBlog') }}">
         <meta name="twitter:description" content="{{ public_description|default:_('We are here, to help you to get everything configured swimmingly. This is a blog for how-to guides, tutorials, installations, and so on.') }}">
         <meta name="twitter:image:src" content="{{ public_image|default:_('/static/images/public_preview.jpg') }}">
-        <meta name="twitter:site" content="@setupfaq"/>
-        <meta name="twitter:domain" content="SetupFAQ"/>
-        <meta name="twitter:creator" content="@setupfaq"/>
+        <meta name="twitter:site" content="@TechBlog"/>
+        <meta name="twitter:domain" content="TechBlog"/>
+        <meta name="twitter:creator" content="@TechBlog"/>
         {# END Meta for public sharing #}
 
         <link href="//fonts.googleapis.com" rel="preconnect" crossorigin="">
@@ -86,16 +84,6 @@
         <script rel="js" src="{% static 'js/bootstrap.min.js' %}"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" >
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167547653-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-167547653-1');
-        </script>
     </head>
     {% is_under_maintenance as under_maintenance %}
     {% if under_maintenance %}
@@ -121,11 +109,11 @@
     <body>
         {# Navbar #}
             <nav class="navbar navbar-expand flex-md-row bg-light">
-            <a class="navbar-brand mr-0 mr-2" href="/" aria-label="SetupFAQ">
+            <a class="navbar-brand mr-0 mr-2" href="/" aria-label="TechBlog">
                 {# <img src="{% static 'images/brand_logo.png' %}" width="194" height="50" class="d-none d-md-inline-block align-top" alt=""> #}
                 <img src="{% static 'images/brand_logo_initial.png' %}" width="30" height="33" class="d-md-none d-sm-inline-block align-top brand-name-initial-logo" alt="">
                 {# <span class="brand-name-custom initial">S</span><span class="brand-name-custom d-none d-md-inline-block">etup.com</span> #}
-                <strong class="d-none d-md-inline-block">SetupFAQ</strong>
+                <strong class="d-none d-md-inline-block">TechBlog</strong>
             </a>
             <div class="ml-auto col-lg-3 col-md-4 col-sm-8 pr-0 pl-5">
                 <form method="get" action="{% url 'article_search' %}">
@@ -159,7 +147,7 @@
                 <div class="container text-md-left text-center">
                     <div class="row mb-2">
                         <div class="col-12">
-                            <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">SetupFAQ</h2></a>
+                            <a href="/" class="text-white lead"><h2 class="display-5 d-inline-block">TechBlog</h2></a>
                         </div>
                     </div>
                     <div class="row">
@@ -173,16 +161,16 @@
                             {# <a href="{% url 'django.contrib.sitemaps.views.sitemap' %}" target="_blank" class="text-white">Sitemap</a> #}
                         </div>
                         <div class="col-md-6 small mt-md-3 mt-2">
-                            &copy; 2020 <a href="/" class="text-light">SetupFAQ</a>. All rights reserved.
+                            &copy; 2020 <a href="/" class="text-light">TechBlog</a>. All rights reserved.
                         </div>
                         <div class="col-md-6 text-md-right small text-light mt-md-3 mt-2">
-                            <a href="https://twitter.com/setupfaq" target="_blank" rel="external nofollow noopener" title="Follow us on Twitter">
+                            <a href="https://twitter.com/TechBlog" target="_blank" rel="external nofollow noopener" title="Follow us on Twitter">
                                 <i class="fa fa-twitter mr-2 large-icon align-bottom" alt="Twitter"></i>
                             </a>
-                            <a href="https://www.linkedin.com/company/setupfaq" target="_blank" rel="external nofollow noopener" title="Follow us on LinkedIn">
+                            <a href="https://www.linkedin.com/company/TechBlog" target="_blank" rel="external nofollow noopener" title="Follow us on LinkedIn">
                                 <i class="fa fa-linkedin-square mr-2 large-icon align-bottom" alt="LinkedIn"></i>
                             </a>
-                            <a href="http://www.facebook.com/setupfaq" target="_blank" rel="external nofollow noopener" title="Follow us on Facebook">
+                            <a href="http://www.facebook.com/TechBlog" target="_blank" rel="external nofollow noopener" title="Follow us on Facebook">
                                 <i class="fa fa-facebook-official large-icon align-bottom" alt="Fb"></i>
                             </a>
                             &nbsp;&centerdot;&nbsp;

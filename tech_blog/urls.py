@@ -1,4 +1,4 @@
-"""setup_main URL Configuration
+"""tech_blog URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -24,10 +24,10 @@ urlpatterns = [
     path('',
          include('apps.website.urls'),
          name='website'),
-    path('update/website/',
+    path('admin/',
          admin.site.urls,
          name='admin'),
-    path('update/website/',
+    path('admin/',
          include('ckeditor_uploader.urls'),
          name='ckeditor'),
     path(

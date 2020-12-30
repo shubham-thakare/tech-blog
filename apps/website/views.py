@@ -107,7 +107,7 @@ def contact_us(request):
             contact_details.save()
 
             # Send notification mail for contact request
-            mail_subject = 'SetupFAQ - Someone is trying to contact you'
+            mail_subject = 'TechBlog - Someone is trying to contact you'
             email_context = {
                 'visitor_name': str(name["value"]).title(),
                 'visitor_email': email["value"],
@@ -176,7 +176,7 @@ def article_base(request, article_id, page_name):
                     'blog_name': article_data.title,
                     'author_name': article_data.author.name,
                 }
-                mail_subject = 'SetupFAQ - ' \
+                mail_subject = 'TechBlog - ' \
                                'Somebody has just commented on your article'
                 mail_body = render_to_string('email/comment_email.html',
                                              email_context)

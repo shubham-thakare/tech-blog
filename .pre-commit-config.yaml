@@ -25,5 +25,4 @@ repos:
       - id: check-merge-conflict
       - id: no-commit-to-branch
         args:
-          - "--branch=develop"
           - "--branch=master"
