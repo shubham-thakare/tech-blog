@@ -39,6 +39,22 @@ Prerequisite
     ./manage.py runserver
     ```
 
+### Features/Modules
+This project has various integrated features/modules:
+1. Website for Users
+2. Admin Interface
+3. Author Profiles
+4. CKEditor for Adding Blogs
+5. Blog Sharing on Social Media
+6. Comments Section for Blogs
+7. Blog Read Time Calculator
+8. Blog Search Engine
+9. Contact Us Page
+10. Email Notifier
+11. RSS Feed
+12. Sitemap
+13. SEO (Search Engine Optimization), etc.
+
 ### References
 1. [Freepik: Illustration vectors](https://www.freepik.com/vectors/illustrations)
 1. [JS library: showdown for rendering md files](https://github.com/showdownjs/showdown)
@@ -48,3 +64,5 @@ Prerequisite
 5. [Migrations Issue](https://stackoverflow.com/questions/29253399/how-to-reset-migrations-in-django-1-7)
 6. [CKEditor Docs](https://libraries.io/github/django-ckeditor/django-ckeditor)
 7. [Privacy Policy Generator](https://www.privacypolicygenerator.info/)
+
+*Please review the [**LICENSE**](LICENSE) file before using this project.*
