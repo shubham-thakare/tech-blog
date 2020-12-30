@@ -1,11 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
+from django.template.loader import render_to_string
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
-from apps.website.helpers.utils import get_host_uri_with_http
+from apps.website.models.authors import Authors
+from apps.website.helpers.utils import get_host_uri_with_scheme, \
+    time_ago, notify_on_email
 from django.contrib.postgres.search import SearchRank, \
     SearchVector, SearchQuery
+from urllib.parse import quote
 import re
 
 
@@ -96,11 +100,22 @@ def contact_us(request):
         if not name['invalid'] and not email['invalid'] and \
                 not message['invalid']:
             contact_details = Inbox(
-                name=name['value'],
+                name=str(name["value"]).title(),
                 email=email['value'],
                 message=message['value']
             )
             contact_details.save()
+
+            # Send notification mail for contact request
+            mail_subject = 'TechBlog - Someone is trying to contact you'
+            email_context = {
+                'visitor_name': str(name["value"]).title(),
+                'visitor_email': email["value"],
+                'message': message["value"]
+            }
+            mail_body = render_to_string('email/contact_email.html',
+                                         email_context)
+            notify_on_email(mail_subject, mail_body)
 
             return render(request, 'website/contact_us.html', {'sent': True})
 
@@ -147,11 +162,27 @@ def article_base(request, article_id, page_name):
                     not comments['invalid']:
                 comment_details = Comments(
                     article=article_data,
-                    name=str(name['value']).title(),
+                    name=str(name['value']).title().strip(),
                     email=email['value'],
                     comments=comments['value']
                 )
                 comment_details.save()
+
+                # Send notification mail for comments
+                email_context = {
+                    'blog_link': f'{get_host_uri_with_scheme(request)}'
+                                 f'{article_data.get_absolute_url()}'
+                                 f'#comments_start',
+                    'blog_name': article_data.title,
+                    'author_name': article_data.author.name,
+                }
+                mail_subject = 'TechBlog - ' \
+                               'Somebody has just commented on your article'
+                mail_body = render_to_string('email/comment_email.html',
+                                             email_context)
+                notify_on_email(mail_subject, mail_body,
+                                other_recipients=[article_data.author.email])
+
                 return HttpResponseRedirect(f'{request.get_full_path()}'
                                             f'#comments_start')
 
@@ -160,8 +191,7 @@ def article_base(request, article_id, page_name):
             .order_by('-submitted_on')
 
         for comment in article_comments:
-            comment.submitted_on = comment.submitted_on \
-                .strftime("%B %d %Y at %H:%M UTC")
+            comment.submitted_on = time_ago(comment.submitted_on.timestamp())
 
         context = {
             'md_file': page_name,
@@ -169,11 +199,12 @@ def article_base(request, article_id, page_name):
             'tags': str(article_data.keywords).split(','),
             'public_title': article_data.title,
             'public_description': article_data.description,
-            'public_image': f'{get_host_uri_with_http(request)}'
+            'public_image': f'{get_host_uri_with_scheme(request)}'
                             f'{article_data.public_image}',
             'created_at': article_data.created_at.date(),
             'read_time': article_data.read_time,
-            'share_url': request.build_absolute_uri(),
+            'share_url': f'{get_host_uri_with_scheme(request)}'
+                            f'{quote(article_data.get_absolute_url())}',
             'related_articles': related_articles,
             'related_articles_length': len(related_articles),
             'page_type': 'article',
@@ -187,8 +218,50 @@ def article_base(request, article_id, page_name):
             'article_comments_length': len(article_comments),
         }
 
+        if article_data.author:
+            context['author_id'] = article_data.author.id
+            context['author_name'] = article_data.author.name
+
         article_data.views += 1
         article_data.save()
         return render(request, f'website/articles/{page_name}.html', context)
+    except Exception:
+        raise Http404()
+
+
+def author(request, author_id, author_name):
+    try:
+        author_details = get_object_or_404(Authors, id=author_id,
+                                           name=author_name)
+        author_details.joined_at = author_details.joined_at.date()
+
+        articles = Article.objects.filter(author=author_details, status='p') \
+            .order_by('-created_at')
+
+        for article in articles:
+            article.time_ago = article.created_at.date()
+
+        try:
+            website_suffix = str(author_details.website).split('//')[1]
+        except Exception:
+            website_suffix = author_details.website
+
+        context = {
+            'public_keywords': f'{author_details.name},'
+                               f'{str(author_details.name).replace(" ", ",")}',
+            'public_title': author_details.name,
+            'public_description': author_details.bio,
+            'public_image': f'{get_host_uri_with_scheme(request)}'
+                            f'{author_details.dp}',
+            'share_url': f'{get_host_uri_with_scheme(request)}'
+                            f'{author_details.get_absolute_url()}',
+            'page_type': 'profile',
+            'author': author_details,
+            'published_articles': articles,
+            'published_articles_length': len(articles),
+            'website_suffix': website_suffix,
+        }
+
+        return render(request, 'website/author_profile.html', context)
     except Exception:
         raise Http404()

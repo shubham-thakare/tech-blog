@@ -1,0 +1,121 @@
+{% extends "./base.html" %}
+
+{% block title %}{{author.name}} - TechBlog{% endblock %}
+
+{% block content %}
+<article class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block text-left"></div>
+        <div class="col-lg-8">
+            <div class="col-12 text-center pt-3 pb-3 bg-light shadow-inset">
+                {% if author.dp %}
+                <div class="col-12">
+                    <img src="{{author.dp}}" height="100px" width="100px" alt="dp" class="rounded-circle object-fit-cover">
+                </div>
+                {% endif %}
+                <div class="col-12 mt-2">
+                    <h3 class="display-md-5 mb-0">{{author.name}}</h3>
+                </div>
+                <div class="col-12 mt-2">
+                    <span class="text-muted article-base-read-time">
+                        {{author.profession}}
+                        <b>&centerdot;</b>
+                        Joined <span class="text-nowrap">{{author.joined_at}}</span>
+                    </span>
+                </div>
+                {% if author.website %}
+                <div class="col-12 d-flex justify-content-center align-items-center mt-md-2 mt-1 article-base-read-time text-muted">
+                    <i class="fa fa-link mr-1 align-bottom" alt="Website"></i>
+                    <a href="{{author.website}}" target="_blank" rel="external nofollow noopener" class="mr-2">{{website_suffix}}</a>
+                </div>
+                {% endif %}
+                {% if author.twitter_profile or author.linkedIn_profile or author.facebook_profile or author.github_profile %}
+                <div class="col-12 mt-2">
+                    {% if author.twitter_profile %}
+                    <a href="https://twitter.com{{author.twitter_profile|default:_('#')}}" target="_blank" rel="external nofollow noopener" class="mr-2"><i class="fa fa-twitter mr-1 large-icon align-bottom" alt="Twitter"></i></a>
+                    {% endif %}
+                    {% if author.linkedIn_profile %}
+                    <a href="https://www.linkedin.com{{author.linkedIn_profile|default:_('#')}}" rel="external nofollow noopener" target="_blank" class="mr-2"><i class="fa fa-linkedin-square mr-1 large-icon align-bottom" alt="LinkedIn"></i></a>
+                    {% endif %}
+                    {% if author.facebook_profile %}
+                    <a href="http://www.facebook.com{{author.facebook_profile|default:_('#')}}" rel="external nofollow noopener" target="_blank" class="mr-2"><i class="fa fa-facebook-official mr-1 large-icon align-bottom" alt="Fb"></i></a>
+                    {% endif %}
+                    {% if author.github_profile %}
+                    <a href="http://www.github.com{{author.github_profile|default:_('#')}}" rel="external nofollow noopener" target="_blank"><i class="fa fa-github mr-1 large-icon align-bottom" alt="GitHub"></i></a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {# Bio Container #}
+            <div class="mt-3 font-weight-light">
+                {{author.bio|safe|linebreaks}}
+            </div>
+            <hr />
+            {# END Bio Container #}
+
+            {% for tag in tags %}
+            {% csrf_token %}
+            <a href="{% url 'article_search' %}?query={{tag}}" class="decoration-none mr-1">
+                <h5 class="d-inline-block font-weight-light">
+                    <span class="badge custom-badge p-2">{{tag}}</span>
+                </h5>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="col-lg-2 d-none d-lg-block text-right">
+            {# <img src="https://via.placeholder.com/160x600.png" /> #}
+        </div>
+    </div>
+</article>
+{% if published_articles_length >= 1 %}
+<div class="jumbotron jumbotron-fluid mb-0 pb-1 pt-0 bg-white">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block text-left"></div>
+            <div class="col-lg-8">
+                <div class="mb-2">
+                    <strong class="text-uppercase">WRITTEN BY {{author.name}}</strong>
+                </div>
+                <div class="row">
+                    {% for article in published_articles %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}" class="d-flex">
+                                <img src="{{article.public_image}}" class="card-img-top" alt="" height="180px" width="260px" loading="lazy">
+                            </a>
+                            <a href="{% url 'article_base' article_id=article.id page_name=article.page_name %}">
+                                <div class="card-body">
+                                    <span class="card-title sm-size truncate-second-line">{{article.title}}</span>
+                                    <p class="card-text sm-size">
+                                        <small class="text-muted">
+                                            {{article.time_ago}}
+                                            <b>&centerdot;</b>
+                                            {{article.read_time}}
+                                        </small>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-2 d-none d-lg-block text-left"></div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="jumbotron jumbotron-fluid mb-0 pb-1 pt-0 mb-5 bg-white">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 d-none d-lg-block text-left"></div>
+            <div class="col-lg-8">
+                <div class="mb-2">
+                    <strong class="text-uppercase">{{author.name}} HAVEN'T WRITTEN ANYTHING YET</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

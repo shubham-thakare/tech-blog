@@ -2,6 +2,8 @@ from django.contrib import admin
 from apps.website.models.article import Article
 from apps.website.models.inbox import Inbox
 from apps.website.models.comments import Comments
+from apps.website.models.authors import Authors
+from apps.website.models.settings import WebsiteSettings
 from django.utils import timezone
 from django import forms
 from ckeditor_uploader.fields import RichTextUploadingFormField
@@ -11,7 +13,7 @@ from apps.website.helpers.utils import get_article_read_time_from_file, \
     remove_file, read_article_html_text
 
 
-admin.site.index_title = 'SetupFAQ administration'
+admin.site.index_title = 'TechBlog administration'
 
 
 class ArticleAdminForm(forms.ModelForm):
@@ -20,6 +22,7 @@ class ArticleAdminForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = [
+            'author',
             'page_name',
             'title',
             'keywords',
@@ -46,15 +49,16 @@ class ArticleAdminForm(forms.ModelForm):
 
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleAdminForm
-    list_display = ['title', 'status', 'last_updated']
-    search_fields = ('id', 'title', 'status')
-    list_filter = ('status', 'created_at', 'last_updated',)
+    list_display = ['title', 'status', 'last_updated', 'author']
+    search_fields = ('author', 'id', 'title', 'status')
+    list_filter = ('author', 'status', 'created_at', 'last_updated',)
     date_hierarchy = 'last_updated'
     ordering = ('-last_updated',)
 
     fieldsets = [
         ['General Information', {
             'fields': [
+                'author',
                 'title',
                 'keywords',
                 'description',
@@ -184,9 +188,52 @@ class CommentsAdmin(admin.ModelAdmin):
     actions = [mark_as_hide, mark_as_show]
 
 
+class AuthorsAdminForm(forms.ModelForm):
+    bio = RichTextUploadingFormField(config_name='authors_config')
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+
+class AuthorsAdmin(admin.ModelAdmin):
+    form = AuthorsAdminForm
+    list_display = ['name', 'email', 'joined_at', 'status']
+    ordering = ('-name',)
+    search_fields = ('name', 'email')
+    list_filter = ('joined_at', 'status')
+    date_hierarchy = 'joined_at'
+
+    # Update comments status to hide
+    def mark_as_inactive(modeladmin, request, queryset):
+        queryset.update(status='IN')
+    mark_as_inactive.short_description = "Mark selected authors as inactive"
+
+    # Update comments status to show
+    def mark_as_active(modeladmin, request, queryset):
+        queryset.update(status='AC')
+    mark_as_active.short_description = "Mark selected authors as active"
+
+    # Deon't delete messages
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    actions = [mark_as_inactive, mark_as_active]
+
+
+class WebsiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ['under_maintenance']
+
+    # Deon't delete messages
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Inbox, InboxAdmin)
 admin.site.register(Comments, CommentsAdmin)
+admin.site.register(Authors, AuthorsAdmin)
+admin.site.register(WebsiteSettings, WebsiteSettingsAdmin)
 
 # Globally disable delete selected
 admin.site.disable_action('delete_selected')

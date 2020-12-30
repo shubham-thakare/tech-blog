@@ -1,12 +1,12 @@
 from django.utils import timezone
-from django.templatetags.tz import register
 from django.shortcuts import render
+from django.core.mail import send_mail
+from django.conf import settings
 import math
 import readtime
 import os
 
 
-@register.simple_tag
 def time_ago(time):
     time_formats = [
         [60, 'seconds', 1],
@@ -26,13 +26,14 @@ def time_ago(time):
         [58060800000, 'centuries', 2903040000]
     ]
 
-    current_time = timezone.now().timestamp()
+    time = int(str(time).split('.')[0])
+    current_time = int(str(timezone.now().timestamp()).split('.')[0])
     seconds = (current_time - time)
     token = 'ago'
     list_choice = 1
 
     if seconds == 0:
-        return 'just now'
+        return 'Just now'
 
     if seconds < 0:
         seconds = math.fabs(seconds)
@@ -83,25 +84,26 @@ def get_article_dir_path():
 def get_article_file_name(title: str):
     timestamp = str(timezone.now().timestamp()).replace(".", "")
     return title \
-        .replace('\'', '') \
-        .replace('"', '') \
-        .replace('.', '') \
-        .replace('!', '') \
-        .replace('<', '') \
-        .replace('>', '') \
-        .replace(':', '') \
-        .replace('/', '') \
-        .replace('\\', '') \
-        .replace('?', '') \
-        .replace('*', '') \
-        .replace(' ', '-') \
-        .lower() + '_' + timestamp
+               .replace('\'', '') \
+               .replace('"', '') \
+               .replace('.', '') \
+               .replace('!', '') \
+               .replace('<', '') \
+               .replace('>', '') \
+               .replace(':', '') \
+               .replace('/', '') \
+               .replace('\\', '') \
+               .replace('?', '') \
+               .replace('*', '') \
+               .replace('&', '') \
+               .replace(' ', '-') \
+               .lower() + '_' + timestamp
 
 
 def get_filename(filename: str):
     filename = filename.split('.')
     filename = f'{str(timezone.now().timestamp()).replace(".", "")}' \
-               f'.{filename[len(filename)-1]}'
+               f'.{filename[len(filename) - 1]}'
     return filename
 
 
@@ -123,6 +125,22 @@ def read_article_html_text(file_path: str):
         return ''
 
 
-def get_host_uri_with_http(request):
+def get_host_uri_with_scheme(request):
     absolute_uri = str(request.build_absolute_uri()).split('/')
     return f'{absolute_uri[0]}//{absolute_uri[2]}'
+
+
+def notify_on_email(subject, message, other_recipients=[]):
+    try:
+        subject = subject
+        message = message
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = list(set([settings.WEBSITE_ADMIN_EMAIL])
+                              | set(other_recipients))
+        send_mail(subject=subject,
+                  message=None,
+                  html_message=message,
+                  from_email=email_from,
+                  recipient_list=recipient_list)
+    except Exception:
+        pass

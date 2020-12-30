@@ -1,6 +1,7 @@
 from django.contrib import sitemaps
 from django.urls import reverse
 from apps.website.models.article import Article
+from apps.website.models.authors import Authors
 
 
 class StaticViewSitemap(sitemaps.Sitemap):
@@ -13,7 +14,6 @@ class StaticViewSitemap(sitemaps.Sitemap):
             'privacy_policy',
             'terms_of_service',
             'articles_rss_feed',
-            'django.contrib.sitemaps.views.sitemap'
         ]
 
     def location(self, item):
@@ -29,3 +29,10 @@ class ArticlesSitemap(sitemaps.Sitemap):
 
     def lastmod(self, item):
         return item.last_updated
+
+
+class AuthorProfilesSitemap(sitemaps.Sitemap):
+    priority = 0.9
+
+    def items(self):
+        return Authors.objects.filter(status='AC').order_by('-joined_at')
