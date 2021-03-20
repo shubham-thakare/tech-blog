@@ -7,7 +7,7 @@ django-url-filter==0.3.14
 environs==7.1.0
 markdown~=2.6
 django-filter==2.2.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 jsonschema==2.6.0
 requests==2.22.0
 
