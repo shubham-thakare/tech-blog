@@ -9,7 +9,7 @@ markdown~=2.6
 django-filter==2.4.0
 Jinja2==2.11.3
 jsonschema==2.6.0
-requests==2.22.0
+requests==2.31.0
 
 # Linting
 flake8==3.7.9
